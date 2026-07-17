@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartopia Flower Crossbreeding Simulator & Layout Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth transitions for grid cells during dynamic color updates */
+        .grid-cell {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
+
+    <header class="bg-indigo-600 text-white shadow-md">
+        <div class="max-w-5xl mx-auto px-4 py-5 flex justify-between items-center">
+            <h1 class="text-xl font-extrabold tracking-wide" id="nav-title">🌸 Heartopia Flower Hub</h1>
+            
+            <div class="flex items-center gap-2">
+                <span class="text-xs opacity-80">🌐</span>
+                <select id="lang-select" onchange="changeLanguage()" class="bg-indigo-700 text-white text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-300 font-medium cursor-pointer max-w-[120px] md:max-w-none">
+                    <option value="en">English</option>
+                    <option value="zh">简体中文</option>
+                    <option value="zht">繁體中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="es">Español</option>
+                    <option value="pt">Português</option>
+                    <option value="ru">Русский</option>
+                    <option value="it">Italiano</option>
+                    <option value="tr">Türkçe</option>
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="th">ไทย</option>
+                    <option value="ar">العربية</option>
+                    <option value="pl">Polski</option>
+                    <option value="nl">Nederlands</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="sv">Svenska</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <section class="md:col-span-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2" id="calc-title">
+                🧪 Crossbreeding Calculator
+            </h2>
+            
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2" id="label-flower">Select Flower Type</label>
+            <select id="flower-select" onchange="updateParentOptions()" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 mb-5 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
+                </select>
+
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2" id="label-p1">Parent 1</label>
+                    <select id="parent1" onchange="syncLayoutColors()" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2" id="label-p2">Parent 2</label>
+                    <select id="parent2" onchange="syncLayoutColors()" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        </select>
+                </div>
+            </div>
+
+            <button onclick="calculateBreed()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition duration-150" id="btn-breed">
+                Breed Now!
+            </button>
+
+            <div id="result-box" class="mt-6 p-4 bg-slate-50 rounded-xl border border-dashed border-slate-200 hidden">
+                <h3 class="text-sm font-bold text-slate-700 mb-2" id="outcome-title">Possible Outcome:</h3>
+                <div id="result-content" class="text-sm space-y-1 text-slate-600">
+                    </div>
+            </div>
+        </section>
+
+        <section class="md:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="flex justify-between items-start mb-2">
+                <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2" id="layout-title">
+                    📐 Efficient Planting Layouts
+                </h2>
+                <span class="text-[10px] bg-emerald-50 text-emerald-600 font-bold px-2 py-0.5 rounded border border-emerald-200 animate-pulse" id="status-tag">● Live Syncing</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6" id="layout-desc">Crossbreeding requires leaving empty spaces for new seeds to spawn! Use these layout designs.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="border border-slate-100 p-4 rounded-xl bg-slate-50">
+                    <h3 class="font-bold text-sm text-indigo-600 mb-1" id="method-a-title">Method A: Cross Layout</h3>
+                    <p class="text-[11px] text-slate-500 mb-3" id="method-a-desc">Best for 2 target flowers. Guaranteed empty space.</p>
+                    <div class="grid grid-cols-3 gap-1.5 w-36 h-36 mx-auto">
+                        <div class="bg-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-bold grid-cell grid-empty">EMPTY</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p1-cell">P1</div>
+                        <div class="bg-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-bold grid-cell grid-empty">EMPTY</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p1-cell">P1</div>
+                        <div class="bg-amber-50 border-2 border-dashed border-amber-300 text-amber-600 rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell">SPAWN</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p2-cell">P2</div>
+                        <div class="bg-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-bold grid-cell grid-empty">EMPTY</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p2-cell">P2</div>
+                        <div class="bg-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-bold grid-cell grid-empty">EMPTY</div>
+                    </div>
+                </div>
+
+                <div class="border border-slate-100 p-4 rounded-xl bg-slate-50">
+                    <h3 class="font-bold text-sm text-indigo-600 mb-1" id="method-b-title">Method B: Checkerboard</h3>
+                    <p class="text-[11px] text-slate-500 mb-3" id="method-b-desc">Maximizes mass production across your plot.</p>
+                    <div class="grid grid-cols-3 gap-1.5 w-36 h-36 mx-auto">
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p1-cell">P1</div>
+                        <div class="bg-amber-50 border-2 border-dashed border-amber-300 text-amber-600 rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell">SPAWN</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p2-cell">P2</div>
+                        <div class="bg-amber-50 border-2 border-dashed border-amber-300 text-amber-600 rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell">SPAWN</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p1-cell">P1</div>
+                        <div class="bg-amber-50 border-2 border-dashed border-amber-300 text-amber-600 rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell">SPAWN</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p2-cell">P2</div>
+                        <div class="bg-amber-50 border-2 border-dashed border-amber-300 text-amber-600 rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell">SPAWN</div>
+                        <div class="rounded-lg flex flex-col items-center justify-center text-[10px] font-bold text-white shadow-sm grid-cell p1-cell">P1</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12 py-8 bg-slate-900 text-slate-400 text-center text-xs border-t border-slate-800">
+        <p class="mb-2" id="footer-text">© 2026 Heartopia Flower Hub. Created for cozy gamers.</p>
+        <p id="footer-link-text">Want to upgrade? <a href="#" class="text-indigo-400 hover:underline">Check out our recommendations →</a></p>
+    </footer>
+
+    <script>
+        // Multi-language localization dictionary (20 countries)
+        const i18n = {
+            en: {
+                navTitle: "🌸 Heartopia Flower Hub", calcTitle: "🧪 Crossbreeding Calculator", labelFlower: "Select Flower Type", labelP1: "Parent 1", labelP2: "Parent 2", btnBreed: "Breed Now!", outcomeTitle: "Possible Outcome:", layoutTitle: "📐 Efficient Planting Layouts", layoutDesc: "Crossbreeding requires leaving empty spaces for new seeds to spawn! Use these layout designs.", methodATitle: "Method A: Cross Layout", methodADesc: "Best for 2 target flowers. Guaranteed empty space.", methodBTitle: "Method B: Checkerboard", methodBDesc: "Maximizes mass production across your plot.", gridEmpty: "EMPTY", gridSpawn: "SPAWN", footerText: "© 2026 Heartopia Flower Hub. Created for cozy gamers.", footerLinkText: "Want to upgrade? ", footerLink: "Check out our recommendations →",
+                flowers: { daisy: "🌼 Daisy", pansy: "🌸 Pansy", tulip: "🌷 Tulip", rose: "🌹 Rose", carnation: "🌺 Carnation", babysbreath: "✨ Baby's Breath" },
+                colors: { red: "🔴 Red", white: "⚪ White", yellow: "🟡 Yellow", pink: "🌸 Pink", orange: "🟠 Orange", purple: "🟣 Purple", black: "⚫ Black", blue: "🔵 Blue", rainbow: "🌈 Rainbow" },
+                results: { success: "Spawn Chance", rare: "Rare!", veryRare: "Very Rare!", epic: "Epic Rare! Water daily!", ultimate: "Ultimate! Empty adjacent grids!", clone: "🌱 Normal Clone", cloneDesc: "Normal clone seed spawned." }
+            },
+            zh: {
+                navTitle: "🌸 心动小镇鲜花助手", calcTitle: "🧪 鲜花杂交概率计算器", labelFlower: "选择鲜花品种", labelP1: "母本 1", labelP2: "母本 2", btnBreed: "立即培育!", outcomeTitle: "可能培育出的新品种：", layoutTitle: "📐 高效种植摆放图示", layoutDesc: "杂交必须在周围留出空位（SPAWN）给新种子生成！请参考以下摆放法。", methodATitle: "方法 A：十字交叉摆放法", methodADesc: "最适合针对性培育2种花，稳定产出新品种。", methodBTitle: "方法 B：棋盘格铺满法", methodBDesc: "最大化利用整块土地，适合大批量杂交。", gridEmpty: "空位", gridSpawn: "新花位", footerText: "© 2026 心动小镇鲜花助手. 为温馨游戏玩家制作。", footerLinkText: "想要升级你的游戏设备？", footerLink: "查看我们推荐的精选外设 →",
+                flowers: { daisy: "🌼 雏菊", pansy: "🌸 三色堇", tulip: "🌷 郁金香", rose: "🌹 玫瑰", carnation: "🌺 康乃馨", babysbreath: "✨ 满天星" },
+                colors: { red: "🔴 红色", white: "⚪ 白色", yellow: "🟡 黄色", pink: "🌸 粉色", orange: "🟠 橙色", purple: "🟣 紫色", black: "⚫ 黑色", blue: "🔵 蓝色", rainbow: "🌈 彩虹色" },
+                results: { success: "培育成功率", rare: "稀有!", veryRare: "极度稀有!", epic: "史诗级稀有！记得每天浇水！", ultimate: "至尊彩虹花！请双重检查格子是否留空！", clone: "🌱 普通克隆 / 同色种子", cloneDesc: "未触发稀有杂交配方，大概率产生母本克隆种子。" }
+            },
+            zht: {
+                navTitle: "🌸 心動小鎮鮮花助手", calcTitle: "🧪 鮮花雜交概率計算器", labelFlower: "選擇鮮花品種", labelP1: "母本 1", labelP2: "母本 2", btnBreed: "立即培育!", outcomeTitle: "可能培育出的新品種：", layoutTitle: "📐 高效種植擺放圖示", layoutDesc: "雜交必須在周圍留出空位（SPAWN）給新種子生成！請參考以下擺放法。", methodATitle: "方法 A：十字交叉擺放法", methodADesc: "最適合針對性培育2種花，穩定產出新品種。", methodBTitle: "方法 B：棋盤格鋪滿法", methodBDesc: "最大化利用整塊土地，適合大批量雜交。", gridEmpty: "空位", gridSpawn: "新花位", footerText: "© 2026 心動小鎮鮮花助手. 為溫馨遊戲玩家製作。", footerLinkText: "想要升級你的遊戲設備？", footerLink: "查看我們推薦的精選外設 →",
+                flowers: { daisy: "🌼 雛菊", pansy: "🌸 三色堇", tulip: "🌷 鬱金香", rose: "🌹 玫瑰", carnation: "🌺 康乃馨", babysbreath: "✨ 滿天星" },
+                colors: { red: "🔴 紅色", white: "⚪ 白色", yellow: "🟡 黃色", pink: "🌸 粉色", orange: "🟠 橙色", purple: "🟣 紫色", black: "⚫ 黑色", blue: "🔵 藍色", rainbow: "🌈 彩虹色" },
+                results: { success: "培育成功率", rare: "稀有!", veryRare: "極度稀有!", epic: "史詩級稀有！記得每天澆水！", ultimate: "至尊彩虹花！請雙重檢查格子是否留空！", clone: "🌱 普通克隆 / 同色種子", cloneDesc: "未觸發稀有雜交配方，大概率產生母本克隆種子。" }
+            },
+            ja: {
+                navTitle: "🌸 ハートピア交配アシスト", calcTitle: "🧪 お花の交配シミュレーター", labelFlower: "花の種類を選択", labelP1: "親 1", labelP2: "親 2", btnBreed: "交配する！", outcomeTitle: "生まれる可能性のある新種：", layoutTitle: "📐 効率的な配置図", layoutDesc: "交配には周囲に空きスペース（SPAWN）が必要です！配置図を参考にしてください。", methodATitle: "方法 A：十字配置法", methodADesc: "特定の2種類を狙うのに最適。確実にスペースを確保します。", methodBTitle: "方法 B：市松模様配置", methodBDesc: "土地を最大活用し、大量生産に向いています。", gridEmpty: "空き", gridSpawn: "誕生枠", footerText: "© 2026 ハートピア交配アシスト. コジーゲーマー向け。", footerLinkText: "おすすめ of ゲーム環境：", footerLink: "推奨デバイスを見る →",
+                flowers: { daisy: "🌼 デイジー", pansy: "🌸 パンジー", tulip: "🌷 チューリップ", rose: "🌹 バラ", carnation: "🌺 カーネーション", babysbreath: "✨ カスミソウ" },
+                colors: { red: "🔴 赤色", white: "⚪ 白色", yellow: "🟡 黄色", pink: "🌸 ピンク", orange: "🟠 オレンジ", purple: "🟣 紫色", black: "⚫ 黒色", blue: "🔵 青色", rainbow: "🌈 レインボー" },
+                results: { success: "交配成功率", rare: "レア！", veryRare: "激レア！", epic: "超激レア！毎日お水をあげましょう！", ultimate: "究極のレインボー！配置スペースを再確認！", clone: "🌱 通常のクローン", cloneDesc: "レア交配の組み合わせではありません。親のコピーが生まれます。" }
+            },
+            ko: {
+                navTitle: "🌸 하트토피아 꽃 교배 도우미", calcTitle: "🧪 꽃 교배 확률 계산기", labelFlower: "꽃 종류 선택", labelP1: "부모 꽃 1", labelP2: "부모 꽃 2", btnBreed: "교배하기!", outcomeTitle: "탄생할 수 있는 새로운 품종:", layoutTitle: "📐 효율적인 재배 배치도", layoutDesc: "교배 시 주변에 빈 공간(SPAWN)이 있어야 씨앗이 자랍니다! 아래 배치도를 활용하세요.", methodATitle: "방법 A: 십자형 배치", methodADesc: "특정 2개의 꽃을 집중 교배할 때 최적입니다. 빈 공간 확보 보장.", methodBTitle: "방법 B: 체크보드 패턴", methodBDesc: "정원 공간을 극대화하여 대량 교배에 적합합니다.", gridEmpty: "빈 칸", gridSpawn: "탄생칸", footerText: "© 2026 하트토피아 꽃 도우미.", footerLinkText: "멋진 게이밍 데스크를 원하시나요? ", footerLink: "추천 상품 확인하기 →",
+                flowers: { daisy: "🌼 데이지", pansy: "🌸 팬지", tulip: "🌷 튤립", rose: "🌹 장미", carnation: "🌺 카네이션", babysbreath: "✨ 안개꽃" },
+                colors: { red: "🔴 빨간색", white: "⚪ 흰색", yellow: "🟡 노란색", pink: "🌸 분홍색", orange: "🟠 주황색", purple: "🟣 보라색", black: "⚫ 검은색", blue: "🔵 파란색", rainbow: "🌈 무지개색" },
+                results: { success: "교배 확률", rare: "희귀!", veryRare: "매우 희귀!", epic: "엄청난 희귀도! 매일 물을 주세요!", ultimate: "궁극의 레인보우! 빈칸을 더 확보하세요!", clone: "🌱 일반 클론 복제", cloneDesc: "특별한 조합이 아닙니다. 부모와 같은 꽃이 탄생할 수 있습니다." }
+            },
+            fr: {
+                navTitle: "🌸 Heartopia Flower Hub", calcTitle: "🧪 Calculateur de Croisement", labelFlower: "Choisir le Type de Fleur", labelP1: "Parent 1", labelP2: "Parent 2", btnBreed: "Croiser !", outcomeTitle: "Résultat Possible :", layoutTitle: "📐 Schémas de Plantation Efficaces", layoutDesc: "Le croisement nécessite de laisser des espaces vides pour les nouvelles graines ! Utilisez ces modèles.", methodATitle: "Méthode A : Disposition en Croix", methodADesc: "Idéal pour cibler 2 fleurs. Espace vide garanti.", methodBTitle: "Méthode B : Damier", methodBDesc: "Maximise la production de masse sur votre parcelle.", gridEmpty: "VIDE", gridSpawn: "POUSSE", footerText: "© 2026 Heartopia Flower Hub. Créé pour les joueurs cosy.", footerLinkText: "Besoin de matériel gaming ? ", footerLink: "Découvrez nos recommandations →",
+                flowers: { daisy: "🌼 Marguerite", pansy: "🌸 Pensée", tulip: "🌷 Tulipe", rose: "🌹 Rose", carnation: "🌺 Œillet", babysbreath: "✨ Gypsophile" },
+                colors: { red: "🔴 Rouge", white: "⚪ Blanc", yellow: "🟡 Jaune", pink: "🌸 Rose", orange: "🟠 Orange", purple: "🟣 Violet", black: "⚫ Noir", blue: "🔵 Bleu", rainbow: "🌈 Arc-en-ciel" },
+                results: { success: "Chances de réussite", rare: "Rare !", veryRare: "Très Rare !", epic: "Ultra Rare ! Arrosez tous les jours !", ultimate: "Fleur Légendaire ! Vérifiez les espaces vides !", clone: "🌱 Clone Normal", cloneDesc: "Aucun croisement rare détecté. Vous obtiendrez probablement un clone." }
+            },
+            de: {
+                navTitle: "🌸 Heartopia Blumen-Zentrum", calcTitle: "🧪 Kreuzungs-Rechner", labelFlower: "Blumenart auswählen", labelP1: "Elternteil 1", labelP2: "Elternteil 2", btnBreed: "Jetzt kreuzen!", outcomeTitle: "Mögliches Ergebnis:", layoutTitle: "📐 Effiziente Pflanz-Layouts", layoutDesc: "Zum Kreuzen müssen leere Plätze frei bleiben! Nutze diese Layouts.", methodATitle: "Methode A: Kreuz-Layout", methodADesc: "Am besten für 2 Zielblumen. Garantiert freier Platz.", methodBTitle: "Methode B: Schachbrett", methodBDesc: "Maximiert die Massenproduktion auf deinem Feld.", gridEmpty: "LEER", gridSpawn: "SPAWN", footerText: "© 2026 Heartopia Blumen-Zentrum. Erstellt für gemütliche Gamer.", footerLinkText: "Gaming-Setup verbessern? ", footerLink: "Hier unsere Empfehlungen ansehen →",
+                flowers: { daisy: "🌼 Gänseblümchen", pansy: "🌸 Stiefmütterchen", tulip: "🌷 Tulpe", rose: "🌹 Rose", carnation: "🌺 Nelke", babysbreath: "✨ Schleierkraut" },
+                colors: { red: "🔴 Rot", white: "⚪ Weiß", yellow: "🟡 Gelb", pink: "🌸 Rosa", orange: "🟠 Orange", purple: "🟣 Lila", black: "⚫ Schwarz", blue: "🔵 Blau", rainbow: "🌈 Regenbogen" },
+                results: { success: "Kreuzungschance", rare: "Selten!", veryRare: "Sehr selten!", epic: "Episch selten! Täglich gießen!", ultimate: "Ultimativ! Prüfe angrenzende freie Felder!", clone: "🌱 Normaler Klon", cloneDesc: "Keine seltene Kombination. Wahrscheinlich Klonen des Elternteils." }
+            },
+            es: {
+                navTitle: "🌸 Heartopia Flower Hub", calcTitle: "🧪 Calculadora de Cruces", labelFlower: "Elige el Tipo de Flor", labelP1: "Progenitor 1", labelP2: "Progenitor 2", btnBreed: "¡Cruzar Ahora!", outcomeTitle: "Resultado Posible:", layoutTitle: "📐 Diseños de Plantación Eficientes", layoutDesc: "¡Para los cruces necesitas dejar espacios vacíos! Usa estos diseños.", methodATitle: "Método A: Diseño en Cruz", methodADesc: "Ideal para 2 flores específicas. Espacio vacío garantizado.", methodBTitle: "Método B: Tablero", methodBDesc: "Maximiza la producción masiva en tu parcela.", gridEmpty: "VACÍO", gridSpawn: "BROTE", footerText: "© 2026 Heartopia Flower Hub. Creado para jugadores cosy.", footerLinkText: "¿Quieres mejorar tu setup? ", footerLink: "Mira nuestras recomendaciones aquí →",
+                flowers: { daisy: "🌼 Margarita", pansy: "🌸 Pensamiento", tulip: "🌷 Tulipán", rose: "🌹 Rosa", carnation: "🌺 Clavel", babysbreath: "✨ Gisófila" },
+                colors: { red: "🔴 Rojo", white: "⚪ Blanco", yellow: "🟡 Amarillo", pink: "🌸 Rosa", orange: "🟠 Naranja", purple: "🟣 Morado", black: "⚫ Negro", blue: "🔵 Azul", rainbow: "🌈 Arcoíris" },
+                results: { success: "Probabilidad", rare: "¡Raro!", veryRare: "¡Muy Raro!", epic: "¡Épico Raro! ¡Riega todos los días!", ultimate: "¡Flor Definitiva! Revisa los espacios vacíos.", clone: "🌱 Clon Normal", cloneDesc: "No se detectaron cruces raros. Obtendrás un clon." }
+            },
+            pt: {
+                navTitle: "🌸 Centro de Flores Heartopia", calcTitle: "🧪 Calculadora de Cruzamento", labelFlower: "Selecione a Flor", labelP1: "Pai 1", labelP2: "Pai 2", btnBreed: "Cruzar Agora!", outcomeTitle: "Resultado Possível:", layoutTitle: "📐 Layouts de Plantio Eficientes", layoutDesc: "O cruzamento requer espaços vazios para as sementes brotarem! Use estes designs.", methodATitle: "Método A: Layout em Cruz", methodADesc: "Melhor para 2 flores alvo. Espaço vazio garantido.", methodBTitle: "Método B: Tabuleiro", methodBDesc: "Maximiza a produção em massa na sua plantação.", gridEmpty: "VAZIO", gridSpawn: "BROTO", footerText: "© 2026 Centro de Flores Heartopia. Criado para gamers cozy.", footerLinkText: "Quer melhorar seu setup? ", footerLink: "Veja nossas recomendações →",
+                flowers: { daisy: "🌼 Margarida", pansy: "🌸 Amor-perfeito", tulip: "🌷 Tulipa", rose: "🌹 Rosa", carnation: "🌺 Cravo", babysbreath: "✨ Gipsófila" },
+                colors: { red: "🔴 Vermelho", white: "⚪ Branco", yellow: "🟡 Amarelo", pink: "🌸 Rosa", orange: "🟠 Laranja", purple: "🟣 Roxo", black: "⚫ Preto", blue: "🔵 Azul", rainbow: "🌈 Arco-íris" },
+                results: { success: "Chance de Broto", rare: "Raro!", veryRare: "Muito Raro!", epic: "Épico Raro! Regue diariamente!", ultimate: "Flor Lendária! Verifique os espaços adjacentes!", clone: "🌱 Clone Normal", cloneDesc: "Nenhum cruzamento raro ativo. Provável clone." }
+            },
+            ru: {
+                navTitle: "🌸 Цветочный Центр Heartopia", calcTitle: "🧪 Калькулятор Скрещивания", labelFlower: "Выбрать Цветок", labelP1: "Родитель 1", labelP2: "Родитель 2", btnBreed: "Скрестить!", outcomeTitle: "Возможный Результат:", layoutTitle: "📐 Схемы Эффективной Посадки", layoutDesc: "Скрещивание требует пустых мест для появления семян! Пользуйтесь схемами.", methodATitle: "Метод A: Крест-накрест", methodADesc: "Лучшее для двух конкретных цветов. Гарантирует пустое место.", methodBTitle: "Метод B: Шахматка", methodBDesc: "Максимизирует массовое скрещивание по всему участку.", gridEmpty: "ПУСТО", gridSpawn: "РОСТОК", footerText: "© 2026 Цветочный Центр Heartopia. Сделано для любителей уютных игр.", footerLinkText: "Хотите обновить девайсы? ", footerLink: "Наши рекомендации тут →",
+                flowers: { daisy: "🌼 Маргаритка", pansy: "🌸 Анютины глазки", tulip: "🌷 Тюльпан", rose: "🌹 Роза", carnation: "🌺 Гвоздика", babysbreath: "✨ Гипсофила" },
+                colors: { red: "🔴 Красный", white: "⚪ Белый", yellow: "🟡 Желтый", pink: "🌸 Розовый", orange: "🟠 Оранжевый", purple: "🟣 Фиолетовый", black: "⚫ Черный", blue: "🔵 Синий", rainbow: "🌈 Радужный" },
+                results: { success: "Шанс появления", rare: "Редкий!", veryRare: "Очень редкий!", epic: "Эпически редкий! Поливайте каждый день!", ultimate: "Легендарный цветок! Проверьте свободные клетки!", clone: "🌱 Обычный клон", cloneDesc: "Редких сочетаний нет. Скорее всего, вырастет клон родителя." }
+            },
+            it: {
+                navTitle: "🌸 Centro dei Fiori Heartopia", calcTitle: "🧪 Calcolatore di Incroci", labelFlower: "Scegli il Fiore", labelP1: "Genitore 1", labelP2: "Genitore 2", btnBreed: "Incrocia Ora!", outcomeTitle: "Possibile Risultato:", layoutTitle: "📐 Layout di Piantagione Efficienti", layoutDesc: "Gli incroci richiedono spazi vuoti per la crescita dei nuovi semi! Usa questi schemi.", methodATitle: "Metodo A: Layout a Croce", methodADesc: "Ideale per 2 fiori mirati. Spazio vuoto garantito.", methodBTitle: "Metodo B: Scacchiera", methodBDesc: "Massimizza la produzione di massa sul tuo terreno.", gridEmpty: "VUOTO", gridSpawn: "GERMOGLIO", footerText: "© 2026 Centro dei Fiori Heartopia. Creato per giocatori cozy.", footerLinkText: "Vuoi migliorare il tuo setup? ", footerLink: "Guarda le nostre raccomandazioni →",
+                flowers: { daisy: "🌼 Margherita", pansy: "🌸 Viola del pensiero", tulip: "🌷 Tulipano", rose: "🌹 Rosa", carnation: "🌺 Garofano", babysbreath: "✨ Gipsofila" },
+                colors: { red: "🔴 Rosso", white: "⚪ Bianco", yellow: "🟡 Giallo", pink: "🌸 Rosa", orange: "🟠 Arancione", purple: "🟣 Viola", black: "⚫ Nero", blue: "🔵 Blu", rainbow: "🌈 Arcobaleno" },
+                results: { success: "Probabilità", rare: "Raro!", veryRare: "Molto Raro!", epic: "Epico Raro! Annaffia ogni giorno!", ultimate: "Fiore Leggendario! Controlla gli spazi liberi attorno!", clone: "🌱 Clone Normale", cloneDesc: "Nessuna combinazione rara rilevata. Probabile clone." }
+            },
+            tr: {
+                navTitle: "🌸 Heartopia Çiçek Merkezi", calcTitle: "🧪 Çaprazlama Hesaplayıcı", labelFlower: "Çiçek Türü Seçin", labelP1: "Ebeveyn 1", labelP2: "Ebeveyn 2", btnBreed: "Çaprazla!", outcomeTitle: "Olası Sonuç:", layoutTitle: "📐 Verimli Dikim Düzenleri", layoutDesc: "Çaprazlama için yeni tohumların çıkacağı boş alanlar bırakmalısınız! Bu düzenleri kullanın.", methodATitle: "Yöntem A: Artı Düzeni", methodADesc: "2 hedef çiçek için en iyisidir. Boş alan garantilenir.", methodBTitle: "Yöntem B: Dama Tahtası", methodBDesc: "Bahçenizdeki toplu üretimi maksimuma çıkarır.", gridEmpty: "BOŞ", gridSpawn: "FİLİZ", footerText: "© 2026 Heartopia Çiçek Merkezi. Cozy oyuncular için tasarlandı.", footerLinkText: "Ekipmanınızı yükseltmek ister misiniz? ", footerLink: "Önerilerimize göz atın →",
+                flowers: { daisy: "🌼 Papatya", pansy: "🌸 Hercai Menekşe", tulip: "🌷 Lale", rose: "🌹 Gül", carnation: "🌺 Karanfil", babysbreath: "✨ Bahar Yıldızı" },
+                colors: { red: "🔴 Kırmızı", white: "⚪ Beyaz", yellow: "🟡 Sarı", pink: "🌸 Pembe", orange: "🟠 Turuncu", purple: "🟣 Mor", black: "⚫ Siyah", blue: "🔵 Mavi", rainbow: "🌈 Gökkuşağı" },
+                results: { success: "Çıkma Şansı", rare: "Nadir!", veryRare: "Çok Nadir!", epic: "Efsanevi Nadir! Her gün sulayın!", ultimate: "Eşsiz Çiçek! Etraftaki boşlukları kontrol edin!", clone: "🌱 Normal Kopya", cloneDesc: "Nadir kombinasyon bulunamadı. Ebeveyn kopyası çıkabilir." }
+            },
+            vi: {
+                navTitle: "🌸 Trợ Lý Hoa Heartopia", calcTitle: "🧪 Máy Tính Lai Tạo Hoa", labelFlower: "Chọn Loại Hoa", labelP1: "Hoa Bố Mẹ 1", labelP2: "Hoa Bố Mẹ 2", btnBreed: "Lai Tạo Ngay!", outcomeTitle: "Kết Quả Khả Thi:", layoutTitle: "📐 Sơ Đồ Trồng Hoa Hiệu Quả", layoutDesc: "Lai tạo cần chừa ô trống để hạt giống mới nảy mầm! Hãy dùng các sơ đồ này.", methodATitle: "Sơ Đồ A: Trồng Chữ Thập", methodADesc: "Tốt nhất để lai tạo 2 loại hoa. Đảm bảo có ô trống.", methodBTitle: "Sơ Đồ B: Bàn Cờ", methodBDesc: "Tối đa hóa sản lượng trồng hoa trên đất của bạn.", gridEmpty: "TRỐNG", gridSpawn: "MẦM MỚI", footerText: "© 2026 Trợ Lý Hoa Heartopia. Dành cho người chơi hệ nhẹ nhàng.", footerLinkText: "Muốn nâng cấp góc chơi game? ", footerLink: "Xem đề xuất của chúng tôi →",
+                flowers: { daisy: "🌼 Cúc Họa Mi", pansy: "🌸 Hoa Păng-xê", tulip: "🌷 Tulip", rose: "🌹 Hồng", carnation: "🌺 Cẩm Chướng", babysbreath: "✨ Hoa Baby" },
+                colors: { red: "🔴 Đỏ", white: "⚪ Trắng", yellow: "🟡 Vàng", pink: "🌸 Hồng", orange: "🟠 Cam", purple: "🟣 Tím", black: "⚫ Đen", blue: "🔵 Xanh Dương", rainbow: "🌈 Ngũ Sắc" },
+                results: { success: "Tỷ Lệ Thành Công", rare: "Hiếm!", veryRare: "Cực Hiếm!", epic: "Siêu Siêu Hiếm! Hãy tưới nước mỗi ngày nhé!", ultimate: "Hoa Cực Phẩm! Hãy kiểm tra kỹ ô trống xung quanh!", clone: "🌱 Nhân Bản Thường", cloneDesc: "Không trùng công thức hiếm. Sẽ ra hoa nhân bản giống bố mẹ." }
+            },
+            id: {
+                navTitle: "🌸 Pusat Bunga Heartopia", calcTitle: "🧪 Kalkulator Persilangan", labelFlower: "Pilih Jenis Bunga", labelP1: "Induk 1", labelP2: "Induk 2", btnBreed: "Silangkan!", outcomeTitle: "Hasil yang Mungkin:", layoutTitle: "📐 Layout Tanam Efisien", layoutDesc: "Persilangan butuh ruang kosong agar bibit baru bisa tumbuh! Gunakan desain ini.", methodATitle: "Metode A: Pola Silang", methodADesc: "Terbaik untuk 2 bunga target. Ruang kosong terjamin.", methodBTitle: "Metode B: Papan Catur", methodBDesc: "Memaksimalkan produksi massal di petak tanah Anda.", gridEmpty: "KOSONG", gridSpawn: "TUMBUH", footerText: "© 2026 Pusat Bunga Heartopia. Dibuat untuk cozy gamers.", footerLinkText: "Ingin upgrade setup gaming? ", footerLink: "Lihat rekomendasi kami →",
+                flowers: { daisy: "🌼 Krisan", pansy: "🌸 Pansy", tulip: "🌷 Tulip", rose: "🌹 Mawar", carnation: "🌺 Anyelir", babysbreath: "✨ Baby's Breath" },
+                colors: { red: "🔴 Merah", white: "⚪ Putih", yellow: "🟡 Kuning", pink: "🌸 Merah Muda", orange: "🟠 Jingga", purple: "🟣 Ungu", black: "⚫ Hitam", blue: "🔵 Biru", rainbow: "🌈 Pelangi" },
+                results: { success: "Peluang Tumbuh", rare: "Langka!", veryRare: "Sangat Langka!", epic: "Langka Epik! Siram setiap hari!", ultimate: "Bunga Legendaris! Periksa ruang kosong sekitar!", clone: "🌱 Kloning Biasa", cloneDesc: "Tidak ada kombinasi langka. Kemungkinan besar tumbuh klon induk." }
+            },
+            th: {
+                navTitle: "🌸 คู่มือดอกไม้ Heartopia", calcTitle: "🧪 เครื่องคำนวณการผสมพันธุ์", labelFlower: "เลือกประเภทดอกไม้", labelP1: "ดอกพ่อพันธุ์ 1", labelP2: "ดอกแม่พันธุ์ 2", btnBreed: "ผสมพันธุ์เลย!", outcomeTitle: "ผลลัพธ์ที่เป็นไปได้:", layoutTitle: "📐 แผนผังการปลูกที่มีประสิทธิภาพ", layoutDesc: "การผสมพันธุ์ต้องเว้นที่ว่างเพื่อให้เมล็ดใหม่เกิดขึ้น! ใช้แผนผังปลูกเหล่านี้", methodATitle: "วิธี A: แผนผังแบบกากบาท", methodADesc: "ดีที่สุดในการเน้นเป้าหมาย 2 ดอก การันตีที่ว่างรอบๆ", methodBTitle: "วิธี B: ลายตารางหมากรุก", methodBDesc: "เพิ่มผลผลิตสูงสุดสำหรับการเพาะปลูกจำนวนมาก", gridEmpty: "ว่าง", gridSpawn: "เมล็ดใหม่", footerText: "© 2026 คู่มือดอกไม้ Heartopia. สร้างขึ้นสำหรับชาวเกมเมอร์สายชิล", footerLinkText: "ต้องการอัปเกรดมุมเล่นเกมของคุณ? ", footerLink: "ดูคำแนะนำของเรา →",
+                flowers: { daisy: "🌼 เดซี่", pansy: "🌸 แพนซี", tulip: "🌷 ทิวลิป", rose: "🌹 กุหลาบ", carnation: "🌺 คาร์เนชั่น", babysbreath: "✨ แคสเปีย" },
+                colors: { red: "🔴 สีแดง", white: "⚪ สีขาว", yellow: "🟡 สีเหลือง", pink: "🌸 สีชมพู", orange: "🟠 สีส้ม", purple: "🟣 สีม่วง", black: "⚫ สีดำ", blue: "🔵 สีน้ำเงิน", rainbow: "🌈 สีรุ้ง" },
+                results: { success: "โอกาสการเกิด", rare: "หายาก!", veryRare: "หายากมาก!", epic: "แรร์ขั้นสุด! รดน้ำทุกวันด้วยนะ!", ultimate: "สุดยอดดอกไม้สีรุ้ง! ตรวจสอบพื้นที่ว่างรอบข้างให้ดี!", clone: "🌱 โคลนธรรมดา", cloneDesc: "ไม่ตรงกับสูตรผสมแรร์ จะออกเป็นสีตามดอกพ่อแม่ปกติ" }
+            },
+            ar: {
+                navTitle: "🌸 مساعد زهور هيرتوبيا", calcTitle: "🧪 حاسبة تهجين الزهور", labelFlower: "اختر نوع الزهرة", labelP1: "الأب الأول", labelP2: "الأب الثاني", btnBreed: "هجن الآن!", outcomeTitle: "النتيجة المتوقعة:", layoutTitle: "📐 مخططات زراعة فعالة", layoutDesc: "يحتاج التهجين إلى ترك مساحات فارغة لنمو البذور الجديدة! استخدم هذه التصاميم.", methodATitle: "الطريقة أ: مخطط التقاطع", methodADesc: "الأفضل لتهجين زهرتين محددتين. مساحة فارغة مضمونة.", methodBTitle: "الطريقة ب: رقعة الشطرنج", methodBDesc: "تزيد من كفاءة التهجين الجماعي في حديقتك بالكامل.", gridEmpty: "فارغ", gridSpawn: "برعم", footerText: "© 2026 مساعد زهور هيرتوبيا. تم إنشاؤه للاعبي الألعاب الهادئة.", footerLinkText: "هل تريد تحسين عتاد الألعاب الخاص بك؟ ", footerLink: "تصفح ترشيحاتنا هنا ←",
+                flowers: { daisy: "🌼 الأقحوان", pansy: "🌸 زهرة الثالوث", tulip: "🌷 التوليب", rose: "🌹 الجوري", carnation: "🌺 القرنفل", babysbreath: "✨ زهور الجبسوفيلا" },
+                colors: { red: "🔴 أحمر", white: "⚪ أبيض", yellow: "🟡 أصفر", pink: "🌸 وردي", orange: "🟠 برتقالي", purple: "🟣 بنفسجي", black: "⚫ أسود", blue: "🔵 أزرق", rainbow: "🌈 قوس قزح" },
+                results: { success: "نسبة النجاح", rare: "نادر!", veryRare: "نادر جداً!", epic: "نادر ملحمي! اسقها يومياً!", ultimate: "الزهرة الأسطورية! تأكد من ترك مساحات حولها!", clone: "🌱 استنساخ عادي", cloneDesc: "لا توجد وصفات نادرة نشطة. ستحصل غالباً على زهرة مشابهة للأبوين." }
+            },
+            pl: {
+                navTitle: "🌸 Heartopia Flower Hub", calcTitle: "🧪 Kalkulator Krzyżowania", labelFlower: "Wybierz Typ Kwiatu", labelP1: "Rodzic 1", labelP2: "Rodzic 2", btnBreed: "Krzyżuj Teraz!", outcomeTitle: "Możliwy Wynik:", layoutTitle: "📐 Wydajne Układy Sadzenia", layoutDesc: "Krzyżowanie wymaga pozostawienia wolnego miejsca na nowe nasiona! Użyj tych wzorów.", methodATitle: "Metoda A: Układ Krzyżowy", methodADesc: "Najlepszy do celowania w 2 kwiaty. Gwarantowane wolne miejsce.", methodBTitle: "Metoda B: Szachownica", methodBDesc: "Maksymalizuje masową produkcję na Twojej działce.", gridEmpty: "PUSTE", gridSpawn: "KIEŁK", footerText: "© 2026 Heartopia Flower Hub. Stworzone dla graczy cozy.", footerLinkText: "Chcesz ulepszyć stanowisko? ", footerLink: "Sprawdź nasze rekomendacje →",
+                flowers: { daisy: "🌼 Stokrotka", pansy: "🌸 Bratek", tulip: "🌷 Tulipan", rose: "🌹 Róża", carnation: "🌺 Goździk", babysbreath: "✨ Gipsówka" },
+                colors: { red: "🔴 Czerwony", white: "⚪ Biały", yellow: "🟡 Żółty", pink: "🌸 Różowy", orange: "🟠 Pomarańczowy", purple: "🟣 Fioletowy", black: "⚫ Czarny", blue: "🔵 Niebieski", rainbow: "🌈 Tęczowy" },
+                results: { success: "Szansa", rare: "Rzadki!", veryRare: "Bardzo Rzadki!", epic: "Epicko Rzadki! Podlewaj codziennie!", ultimate: "Mityczny Kwiat! Sprawdź wolne pola wokół!", clone: "🌱 Zwykły Klon", cloneDesc: "Brak rzadkich kombinacji. Otrzymasz klon rodzica." }
+            },
+            nl: {
+                navTitle: "🌸 Heartopia Bloemen Hub", calcTitle: "🧪 Kruisings Calculator", labelFlower: "Kies Bloemtype", labelP1: "Ouder 1", labelP2: "Ouder 2", btnBreed: "Nu Kruisen!", outcomeTitle: "Mogelijk Resultaat:", layoutTitle: "📐 Efficiënte Plantpatronen", layoutDesc: "Kruisen vereist lege plekken voor nieuwe zaden! Gebruik deze patronen.", methodATitle: "Methode A: Kruispatroon", methodADesc: "Beste voor 2 specifieke bloemen. Gegarandeerd lege ruimte.", methodBTitle: "Methode B: Schaakbord", methodBDesc: "Maximaliseert massaproductie op je veld.", gridEmpty: "LEEG", gridSpawn: "KIEM", footerText: "© 2026 Heartopia Bloemen Hub. Gemaakt voor gezellige gamers.", footerLinkText: "Je gaming setup upgraden? ", footerLink: "Bekijk onze aanbevelingen →",
+                flowers: { daisy: "🌼 Madeliefje", pansy: "🌸 Viooltje", tulip: "🌷 Tulp", rose: "🌹 Roos", carnation: "🌺 Anjer", babysbreath: "✨ Gipskruid" },
+                colors: { red: "🔴 Rood", white: "⚪ Wit", yellow: "🟡 Geel", pink: "🌸 Roze", orange: "🟠 Oranje", purple: "🟣 Paars", black: "⚫ Zwart", blue: "🔵 Blauw", rainbow: "🌈 Regenboog" },
+                results: { success: "Kans op ontkieming", rare: "Zeldzaam!", veryRare: "Zeer Zeldzaam!", epic: "Episch Zeldzaam! Geef dagelijks water!", ultimate: "Ultieme Bloem! Controleer omringende lege vakjes!", clone: "🌱 Normale Kloon", cloneDesc: "Geen zeldzame combinaties actief. Waarschijnlijk een kloon." }
+            },
+            hi: {
+                navTitle: "🌸 हार्टोपिया फ्लावर हब", calcTitle: "🧪 फूल संकरण कैलकुलेटर", labelFlower: "फूल का प्रकार चुनें", labelP1: "जनक फूल 1", labelP2: "जनक फूल 2", btnBreed: "संकरण करें!", outcomeTitle: "संभावित परिणाम:", layoutTitle: "📐 कुशल रोपण लेआउट", layoutDesc: "संकरण के लिए नए बीजों के पनपने हेतु खाली जगह छोड़ना आवश्यक है! इन डिजाइनों का उपयोग करें।", methodATitle: "विधि A: क्रॉस लेआउट", methodADesc: "2 लक्षित फूलों के लिए सर्वोत्तम। खाली जगह की गारंटी।", methodBTitle: "विधि B: चेकरबोर्ड", methodBDesc: "आपकी क्यारी में बड़े पैमाने पर उत्पादन को अधिकतम करता है।", gridEmpty: "खाली", gridSpawn: "अंकुर", footerText: "© 2026 हार्टोपिया फ्लावर हब। कोज़ी गेमर्स के लिए निर्मित।", footerLinkText: "गेमिंग सेटअप अपग्रेड करना चाहते हैं? ", footerLink: "हमारी सिफारिशें देखें →",
+                flowers: { daisy: "🌼 गुलबहार", pansy: "🌸 बनफूल", tulip: "🌷 ट्यूलिप", rose: "🌹 गुलाब", carnation: "🌺 कार्नेशन", babysbreath: "✨ जिप्सोफिला" },
+                colors: { red: "🔴 लाल", white: "⚪ सफेद", yellow: "🟡 पीला", pink: "🌸 गुलाबी", orange: "🟠 नारंगी", purple: "🟣 बैंगनी", black: "⚫ काला", blue: "🔵 नीला", rainbow: "🌈 सतरंगी" },
+                results: { success: "पनपने की संभावना", rare: "दुर्लभ!", veryRare: "अत्यधिक दुर्लभ!", epic: "महा दुर्लभ! रोजाना पानी दें!", ultimate: "सर्वोच्च सतरंगी फूल! आस-पास के खाली खानों की जाँच करें!", clone: "🌱 सामान्य क्लोन", cloneDesc: "कोई दुर्लभ संयोजन सक्रिय नहीं है। जनक क्लोน मिलने की संभावना है।" }
+            },
+            sv: {
+                navTitle: "🌸 Heartopia Blomster Hub", calcTitle: "🧪 Korsningskalkylator", labelFlower: "Välj Blomtyp", labelP1: "Förälder 1", labelP2: "Förälder 2", btnBreed: "Korsa Nu!", outcomeTitle: "Möjligt Resultat:", layoutTitle: "📐 Effektiva Planteringsmönster", layoutDesc: "Korsning kräver tomma utrymmen för nya frön att gro! Använd dessa mönster.", methodATitle: "Metode A: Korslayout", methodADesc: "Bäst för 2 målblommor. Garanterat tomt utrymme.", methodBTitle: "Metode B: Schackbräde", methodBDesc: "Maximerar massproduktion på din tomt.", gridEmpty: "TOMT", gridSpawn: "GRODD", footerText: "© 2026 Heartopia Blomster Hub. Skapad för mysiga spelare.", footerLinkText: "Vill du uppgradera din setup? ", footerLink: "Se våra rekommendationer →",
+                flowers: { daisy: "🌼 Tusensköna", pansy: "🌸 Pensé", tulip: "🌷 Tulipan", rose: "🌹 Ros", carnation: "🌺 Nejlika", babysbreath: "✨ Brudslöja" },
+                colors: { red: "🔴 Röd", white: "⚪ Vit", yellow: "🟡 Gul", pink: "🌸 Rosa", orange: "🟠 Orange", purple: "🟣 Lila", black: "⚫ Svart", blue: "🔵 Blå", rainbow: "🌈 Regnbåge" },
+                results: { success: "Chans till grodd", rare: "Sällsynt!", veryRare: "Mycket sällsynt!", epic: "Episkt sällsynt! Vattna dagligen!", ultimate: "Ultimat Blomma! Dubbelkolla tom rutor bredvid!", clone: "🌱 Normal Klon", cloneDesc: "Inga sällsynta kombinationer aktiva. Troligtvis en kopia." }
+            }
+        };
+
+        // Tailwind color mapping classes for layout nodes
+        const colorTailwindClasses = {
+            red: { bg: "bg-red-500", text: "text-white" },
+            white: { bg: "bg-slate-100 border border-slate-300", text: "text-slate-700" },
+            yellow: { bg: "bg-amber-400", text: "text-amber-950" },
+            pink: { bg: "bg-pink-400", text: "text-white" },
+            orange: { bg: "bg-orange-500", text: "text-white" },
+            purple: { bg: "bg-purple-600", text: "text-white" },
+            black: { bg: "bg-slate-900", text: "text-white" },
+            blue: { bg: "bg-blue-600", text: "text-white" },
+            rainbow: { bg: "bg-gradient-to-tr from-pink-400 via-yellow-300 via-green-300 to-indigo-500", text: "text-indigo-950" }
+        };
+
+        // Permitted base colors for each species
+        const flowerBaseColors = {
+            daisy: ["red", "white", "yellow", "pink", "orange", "purple"],
+            pansy: ["red", "yellow", "blue", "orange", "purple", "black"],
+            tulip: ["red", "white", "yellow", "pink", "purple", "black"],
+            rose: ["red", "white", "yellow", "pink", "orange", "black", "blue"],
+            carnation: ["red", "white", "pink", "purple"],
+            babysbreath: ["white", "pink", "blue", "rainbow"]
+        };
+
+        // Determine quality star level for display UI
+        function getStar(flower, color) {
+            if (flower === 'carnation') {
+                if (color === 'red' || color === 'white') return "2★";
+                return "3★";
+            }
+            if (flower === 'babysbreath') {
+                if (color === 'white') return "3★";
+                if (color === 'rainbow') return "5★";
+                return "4★";
+            }
+            const stars = { red: "1★", white: "1★", yellow: "1★", pink: "2★", orange: "2★", purple: "2★", black: "3★", blue: "4★", rainbow: "5★" };
+            return stars[color] || "1★";
+        }
+
+        // Compact abbreviations mapped by language to fit neatly in tight grids
+        const shortInitials = {
+            en: { daisy: "DY", pansy: "PY", tulip: "TP", rose: "RS", carnation: "CN", babysbreath: "BB" },
+            zh: { daisy: "雏", pansy: "堇", tulip: "郁", rose: "玫", carnation: "康", babysbreath: "星" },
+            zht: { daisy: "雛", pansy: "堇", tulip: "鬱", rose: "玫", carnation: "康", babysbreath: "星" },
+            ja: { daisy: "デ", pansy: "パ", tulip: "チ", rose: "バ", carnation: "カ", babysbreath: "カ" },
+            ko: { daisy: "데", pansy: "팬", tulip: "튤", rose: "장", carnation: "카", babysbreath: "안" }
+        };
+
+        // Helper function to extract correct layout labels
+        function getShortInitial(lang, flower) {
+            if (shortInitials[lang] && shortInitials[lang][flower]) return shortInitials[lang][flower];
+            if (shortInitials['en'][flower]) return shortInitials['en'][flower];
+            return "FL";
+        }
+
+        // Switch whole-page locales
+        function changeLanguage() {
+            const lang = document.getElementById('lang-select').value;
+            const t = i18n[lang];
+
+            // Render translated text nodes
+            document.getElementById('nav-title').textContent = t.navTitle;
+            document.getElementById('calc-title').textContent = t.calcTitle;
+            document.getElementById('label-flower').textContent = t.labelFlower;
+            document.getElementById('label-p1').textContent = t.labelP1;
+            document.getElementById('label-p2').textContent = t.labelP2;
+            document.getElementById('btn-breed').textContent = t.btnBreed;
+            document.getElementById('outcome-title').textContent = t.outcomeTitle;
+            document.getElementById('layout-title').textContent = t.layoutTitle;
+            document.getElementById('layout-desc').textContent = t.layoutDesc;
+            document.getElementById('method-a-title').textContent = t.methodATitle;
+            document.getElementById('method-a-desc').textContent = t.methodADesc;
+            document.getElementById('method-b-title').textContent = t.methodBTitle;
+            document.getElementById('method-b-desc').textContent = t.methodBDesc;
+            document.getElementById('footer-text').textContent = t.footerText;
+            document.getElementById('footer-link-text').innerHTML = `${t.footerLinkText} <a href="#" class="text-indigo-400 hover:underline">${t.footerLink}</a>`;
+
+            // Translate empty cells inside grid templates
+            document.querySelectorAll('.grid-empty').forEach(el => el.textContent = t.gridEmpty);
+
+            // Rebuild option sets
+            updateFlowerSelectOptions();
+            updateParentOptions();
+            
+            // Re-render layout panels with new language
+            syncLayoutColors();
+
+            // Refresh result box if open to ensure output aligns with new locale
+            if(!document.getElementById('result-box').classList.contains('hidden')) {
+                calculateBreed();
+            }
+        }
+
+        // Populate options in the species dropdown list
+        function updateFlowerSelectOptions() {
+            const lang = document.getElementById('lang-select').value;
+            const select = document.getElementById('flower-select');
+            const currentValue = select.value || "daisy";
+
+            select.innerHTML = "";
+            for (const key in i18n[lang].flowers) {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = i18n[lang].flowers[key];
+                select.appendChild(opt);
+            }
+            select.value = currentValue;
+        }
+
+        // Populate parent dropdown lists with valid colors and stars
+        function updateParentOptions() {
+            const lang = document.getElementById('lang-select').value;
+            const flower = document.getElementById('flower-select').value;
+            const p1Select = document.getElementById('parent1');
+            const p2Select = document.getElementById('parent2');
+
+            const p1Val = p1Select.value;
+            const p2Val = p2Select.value;
+            
+            p1Select.innerHTML = "";
+            p2Select.innerHTML = "";
+            
+            flowerBaseColors[flower].forEach(color => {
+                const text = `${i18n[lang].colors[color]} (${getStar(flower, color)})`;
+                
+                const opt1 = document.createElement('option');
+                opt1.value = color;
+                opt1.textContent = text;
+                p1Select.appendChild(opt1);
+
+                const opt2 = document.createElement('option');
+                opt2.value = color;
+                opt2.textContent = text;
+                p2Select.appendChild(opt2);
+            });
+
+            if (flowerBaseColors[flower].includes(p1Val)) p1Select.value = p1Val;
+            if (flowerBaseColors[flower].includes(p2Val)) p2Select.value = p2Val;
+
+            if(p1Select.value === p2Select.value && p2Select.options.length > 1) {
+                p2Select.selectedIndex = 1;
+            }
+        }
+
+        // Dynamically paint grid templates using parent parameters
+        function syncLayoutColors() {
+            const lang = document.getElementById('lang-select').value;
+            const flower = document.getElementById('flower-select').value;
+            const p1Color = document.getElementById('parent1').value || flowerBaseColors[flower][0];
+            const p2Color = document.getElementById('parent2').value || flowerBaseColors[flower][1] || flowerBaseColors[flower][0];
+
+            const t = i18n[lang];
+
+            // 1. Fetch Tailwind paint configs
+            const p1Style = colorTailwindClasses[p1Color] || colorTailwindClasses.white;
+            const p2Style = colorTailwindClasses[p2Color] || colorTailwindClasses.white;
+
+            // 2. Fetch layout labels and emojis
+            const flowerNameShort = getShortInitial(lang, flower);
+            const p1Emoji = t.colors[p1Color] ? t.colors[p1Color].split(' ')[0] : '🌱';
+            const p2Emoji = t.colors[p2Color] ? t.colors[p2Color].split(' ')[0] : '🌱';
+
+            // 3. Anticipate the outcome color for SPAWN previews
+            const spawnPredict = predictSpawnColor(flower, p1Color, p2Color);
+            const spawnPredictStyle = colorTailwindClasses[spawnPredict.color] || { bg: "bg-amber-50 border-2 border-dashed border-amber-300", text: "text-amber-700" };
+            const spawnEmoji = t.colors[spawnPredict.color] ? t.colors[spawnPredict.color].split(' ')[0] : '✨';
+
+            // 4. Update Parent 1 UI nodes
+            document.querySelectorAll('.p1-cell').forEach(el => {
+                el.className = `rounded-lg flex flex-col items-center justify-center text-[10px] font-bold shadow-sm grid-cell p1-cell ${p1Style.bg} ${p1Style.text}`;
+                el.innerHTML = `<span class="text-[12px]">${p1Emoji}</span><span>${flowerNameShort}-P1</span>`;
+            });
+
+            // 5. Update Parent 2 UI nodes
+            document.querySelectorAll('.p2-cell').forEach(el => {
+                el.className = `rounded-lg flex flex-col items-center justify-center text-[10px] font-bold shadow-sm grid-cell p2-cell ${p2Style.bg} ${p2Style.text}`;
+                el.innerHTML = `<span class="text-[12px]">${p2Emoji}</span><span>${flowerNameShort}-P2</span>`;
+            });
+
+            // 6. Update Spawn preview nodes
+            document.querySelectorAll('.spawn-cell').forEach(el => {
+                if (spawnPredict.color !== "none") {
+                    // Match found: light up cells with predicted color and a subtle bounce
+                    el.className = `rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell opacity-90 border-2 border-dashed border-indigo-400 ${spawnPredictStyle.bg} ${spawnPredictStyle.text}`;
+                    el.innerHTML = `<span class="text-[11px] animate-bounce">${spawnEmoji}</span><span>${t.gridSpawn}</span>`;
+                } else {
+                    // No match: revert to default generic golden dotted indicator
+                    el.className = "bg-amber-50 border-2 border-dashed border-amber-300 text-amber-600 rounded-lg flex flex-col items-center justify-center text-[9px] font-bold grid-cell spawn-cell";
+                    el.innerHTML = `<span class="text-[11px]">✨</span><span>${t.gridSpawn}</span>`;
+                }
+            });
+        }
+
+        // Lightweight pairing matrix for layout predictions
+        function predictSpawnColor(flower, p1, p2) {
+            const pair = [p1, p2].sort().join('+');
+            switch (flower) {
+                case 'daisy':
+                    if (pair === 'red+white') return { color: 'pink' };
+                    if (pair === 'red+yellow') return { color: 'orange' };
+                    if (pair === 'orange+pink') return { color: 'purple' };
+                    break;
+                case 'pansy':
+                    if (pair === 'red+yellow') return { color: 'orange' };
+                    if (pair === 'blue+red') return { color: 'purple' };
+                    if (pair === 'orange+purple') return { color: 'black' };
+                    break;
+                case 'tulip':
+                    if (pair === 'red+white') return { color: 'pink' };
+                    if (pair === 'red+yellow') return { color: 'purple' };
+                    if (pair === 'pink+purple') return { color: 'black' };
+                    break;
+                case 'rose':
+                    if (pair === 'red+white') return { color: 'pink' };
+                    if (pair === 'red+yellow') return { color: 'orange' };
+                    if (pair === 'orange+pink') return { color: 'black' };
+                    if (pair === 'black+pink') return { color: 'blue' };
+                    break;
+                case 'carnation':
+                    if (pair === 'red+white') return { color: 'pink' };
+                    if (pair === 'pink+pink') return { color: 'purple' };
+                    break;
+                case 'babysbreath':
+                    if (pair === 'blue+pink') return { color: 'rainbow' };
+                    if (pair === 'white+white') return { color: 'pink' };
+                    break;
+            }
+            return { color: 'none' };
+        }
+
+        // Trigger breeds and return exact statistics
+        function calculateBreed() {
+            const lang = document.getElementById('lang-select').value;
+            const flower = document.getElementById('flower-select').value;
+            const p1 = document.getElementById('parent1').value;
+            const p2 = document.getElementById('parent2').value;
+            
+            const resultBox = document.getElementById('result-box');
+            const resultContent = document.getElementById('result-content');
+            
+            resultBox.classList.remove('hidden');
+
+            const parents = [p1, p2].sort().join('+');
+            let outputHTML = "";
+            const t = i18n[lang];
+
+            switch (flower) {
+                case 'daisy':
+                    if (parents === 'red+white') {
+                        outputHTML = `<p class="text-pink-500 font-bold">🌸 ${t.colors.pink} ${t.flowers.daisy} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~45%</strong></p>`;
+                    } else if (parents === 'red+yellow') {
+                        outputHTML = `<p class="text-orange-500 font-bold">🟠 ${t.colors.orange} ${t.flowers.daisy} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~45%</strong></p>`;
+                    } else if (parents === 'orange+pink') {
+                        outputHTML = `<p class="text-purple-600 font-bold">🟣 ${t.colors.purple} ${t.flowers.daisy} (3★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~15%</strong> (${t.results.rare})</p>`;
+                    } else {
+                        outputHTML = defaultCloneText(t);
+                    }
+                    break;
+                case 'pansy':
+                    if (parents === 'red+yellow') {
+                        outputHTML = `<p class="text-orange-500 font-bold">🟠 ${t.colors.orange} ${t.flowers.pansy} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~40%</strong></p>`;
+                    } else if (parents === 'blue+red') {
+                        outputHTML = `<p class="text-purple-600 font-bold">🟣 ${t.colors.purple} ${t.flowers.pansy} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~35%</strong></p>`;
+                    } else if (parents === 'orange+purple') {
+                        outputHTML = `<p class="text-slate-900 font-bold">⚫ ${t.colors.black} ${t.flowers.pansy} (3★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~12%</strong> (${t.results.veryRare})</p>`;
+                    } else {
+                        outputHTML = defaultCloneText(t);
+                    }
+                    break;
+                case 'tulip':
+                    if (parents === 'red+white') {
+                        outputHTML = `<p class="text-pink-500 font-bold">🌸 ${t.colors.pink} ${t.flowers.tulip} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~40%</strong></p>`;
+                    } else if (parents === 'red+yellow') {
+                        outputHTML = `<p class="text-purple-600 font-bold">🟣 ${t.colors.purple} ${t.flowers.tulip} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~30%</strong></p>`;
+                    } else if (parents === 'pink+purple') {
+                        outputHTML = `<p class="text-slate-900 font-bold">⚫ ${t.colors.black} ${t.flowers.tulip} (3★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~10%</strong> (${t.results.veryRare})</p>`;
+                    } else {
+                        outputHTML = defaultCloneText(t);
+                    }
+                    break;
+                case 'rose':
+                    if (parents === 'red+white') {
+                        outputHTML = `<p class="text-pink-500 font-bold">🌸 ${t.colors.pink} ${t.flowers.rose} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~35%</strong></p>`;
+                    } else if (parents === 'red+yellow') {
+                        outputHTML = `<p class="text-orange-500 font-bold">🟠 ${t.colors.orange} ${t.flowers.rose} (2★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~35%</strong></p>`;
+                    } else if (parents === 'orange+pink') {
+                        outputHTML = `<p class="text-slate-900 font-bold">⚫ ${t.colors.black} ${t.flowers.rose} (3★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~15%</strong></p>`;
+                    } else if (parents === 'black+pink') {
+                        outputHTML = `<p class="text-blue-600 font-bold">🔵 ${t.colors.blue} ${t.flowers.rose} (4★) 👑</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~5%</strong> (${t.results.epic})</p>`;
+                    } else {
+                        outputHTML = defaultCloneText(t);
+                    }
+                    break;
+                case 'carnation':
+                    if (parents === 'red+white') {
+                        outputHTML = `<p class="text-pink-500 font-bold">🌸 ${t.colors.pink} ${t.flowers.carnation} (3★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~30%</strong></p>`;
+                    } else if (parents === 'pink+pink') {
+                        outputHTML = `<p class="text-purple-600 font-bold">🟣 ${t.colors.purple} ${t.flowers.carnation} (3★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~15%</strong></p>`;
+                    } else {
+                        outputHTML = defaultCloneText(t);
+                    }
+                    break;
+                case 'babysbreath':
+                    if (parents === 'blue+pink') {
+                        outputHTML = `<p class="text-indigo-600 font-bold">🌈 ${t.colors.rainbow} ${t.flowers.babysbreath} (5★) 🏆</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~3%</strong> (${t.results.ultimate})</p>`;
+                    } else if (parents === 'white+white') {
+                        outputHTML = `<p class="text-pink-500 font-bold">🌸 ${t.colors.pink} / 🔵 ${t.colors.blue} ${t.flowers.babysbreath} (4★)</p>
+                                      <p class="text-slate-500 text-xs mt-1">${t.results.success}: <strong>~20%</strong></p>`;
+                    } else {
+                        outputHTML = defaultCloneText(t);
+                    }
+                    break;
+            }
+
+            resultContent.innerHTML = outputHTML;
+        }
+
+        // Fallback default message when no rare match exists
+        function defaultCloneText(t) {
+            return `<p class="text-slate-700 font-bold">${t.results.clone}</p>
+                    <p class="text-slate-500 text-xs mt-1">${t.results.cloneDesc}</p>`;
+        }
+
+        // Initialize user preferences on page load
+        window.onload = function() {
+            // Auto-detect browser locale settings to configure default language
+            const browserLang = navigator.language || navigator.userLanguage;
+            if(browserLang.startsWith('zh-CN') || browserLang.startsWith('zh-SG')) {
+                document.getElementById('lang-select').value = 'zh';
+            } else if(browserLang.startsWith('zh-')) {
+                document.getElementById('lang-select').value = 'zht';
+            } else if(browserLang.startsWith('ja')) {
+                document.getElementById('lang-select').value = 'ja';
+            } else if(browserLang.startsWith('ko')) {
+                document.getElementById('lang-select').value = 'ko';
+            } else if(browserLang.startsWith('fr')) {
+                document.getElementById('lang-select').value = 'fr';
+            } else if(browserLang.startsWith('de')) {
+                document.getElementById('lang-select').value = 'de';
+            } else if(browserLang.startsWith('es')) {
+                document.getElementById('lang-select').value = 'es';
+            } else if(browserLang.startsWith('pt')) {
+                document.getElementById('lang-select').value = 'pt';
+            } else if(browserLang.startsWith('ru')) {
+                document.getElementById('lang-select').value = 'ru';
+            } else {
+                document.getElementById('lang-select').value = 'en'; // Fallback default is English
+            }
+            changeLanguage();
+        };
+    </script>
+</body>
+</html>
