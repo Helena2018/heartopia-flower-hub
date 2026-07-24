@@ -40,12 +40,12 @@
             <div class="flex items-center gap-3">
                 <a href="index.html" class="text-stone-500 hover:text-stone-800 text-sm font-medium transition">← Home</a>
                 <span class="text-stone-300">|</span>
-                <span class="text-xl">🦤</span>
-                <h1 class="font-bold text-stone-800 text-lg">Wildlife Active Radar</h1>
+                <span class="text-xl">🌿</span>
+                <h1 class="font-bold text-stone-800 text-lg">Heartopia Companion Radar</h1>
             </div>
             <div class="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full font-semibold flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                Live Simulation Active
+                Radar Active
             </div>
         </div>
     </header>
@@ -53,12 +53,12 @@
     <!-- Main Container -->
     <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8 space-y-6">
 
-        <!-- Collection Progress Bar Section -->
+        <!-- Progress Bar -->
         <section class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-3">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="font-bold text-stone-800 text-lg">Collection Progress</h2>
-                    <p class="text-xs text-stone-500">Track your captured birds and insects in Heartopia</p>
+                    <p class="text-xs text-stone-500">Track all captured wildlife & flora in Heartopia</p>
                 </div>
                 <div class="text-right">
                     <span id="progress-text" class="text-2xl font-black text-emerald-600">0 / 0</span>
@@ -70,7 +70,7 @@
             </div>
         </section>
 
-        <!-- P1 Feature: In-Game Environment Simulator (Simulate Radar) -->
+        <!-- Weather/Time Environment Simulator (P1) -->
         <section class="bg-amber-500/10 border border-amber-200 p-6 rounded-2xl shadow-sm space-y-4">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
                 <div>
@@ -78,17 +78,15 @@
                         <span class="text-lg">📡</span>
                         <h2 class="font-bold text-amber-900 text-base">In-Game Weather & Time Simulator</h2>
                     </div>
-                    <p class="text-xs text-amber-700/80">Select your current in-game conditions to filter available creatures!</p>
+                    <p class="text-xs text-amber-700/80">Select current environment conditions to see active creatures!</p>
                 </div>
                 
-                <!-- Quick Active Toggle Button -->
                 <button id="toggle-active-only" onclick="toggleActiveFilter()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition flex items-center justify-center gap-2">
                     <span>⚡ Active Right Now Only</span>
                     <span id="active-badge" class="bg-white/20 text-white px-1.5 py-0.5 rounded text-[10px]">OFF</span>
                 </button>
             </div>
 
-            <!-- Current Condition Selectors -->
             <div class="grid grid-cols-2 md:grid-cols-2 gap-3 pt-2 border-t border-amber-200/60">
                 <div>
                     <label class="block text-xs font-bold text-amber-900 mb-1">Current Weather</label>
@@ -109,31 +107,41 @@
             </div>
         </section>
 
-        <!-- Search & General Category Filter Section -->
+        <!-- Filters (Category & Sub-Category) -->
         <section class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4">
             <h2 class="font-bold text-stone-800 text-xs uppercase tracking-wider text-stone-400">Search & Category Filters</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Search Input -->
                 <div>
-                    <label class="block text-xs font-semibold text-stone-600 mb-1">Search Name or Location</label>
-                    <input type="text" id="search-input" placeholder="e.g. Swallow, Forest..." class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-stone-600 mb-1">Search Keyword</label>
+                    <input type="text" id="search-input" placeholder="e.g. Swallow, Lake..." class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
                 </div>
 
-                <!-- Category Filter -->
+                <!-- Main Category Filter -->
                 <div>
-                    <label class="block text-xs font-semibold text-stone-600 mb-1">Category</label>
-                    <select id="category-filter" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-stone-600 mb-1">Main Category</label>
+                    <select id="category-filter" onchange="handleCategoryChange()" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
                         <option value="all">All Categories</option>
                         <option value="Bird">Birds 🦤</option>
                         <option value="Insect">Insects 🦋</option>
+                        <option value="Fish">Fish 🐟</option>
+                        <option value="Flora">Flora & Fungi 🌸</option>
                     </select>
                 </div>
 
-                <!-- Collection Status Filter -->
+                <!-- Sub-Category Filter -->
                 <div>
-                    <label class="block text-xs font-semibold text-stone-600 mb-1">Collection Status</label>
-                    <select id="status-filter" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-stone-600 mb-1">Sub-Category</label>
+                    <select id="subcategory-filter" onchange="renderCards()" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
+                        <option value="all">All Sub-Categories</option>
+                    </select>
+                </div>
+
+                <!-- Status Filter -->
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 mb-1">Status</label>
+                    <select id="status-filter" onchange="renderCards()" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
                         <option value="all">All Status</option>
                         <option value="uncaught">Uncaught Only ❌</option>
                         <option value="caught">Caught Only ✅</option>
@@ -142,10 +150,10 @@
             </div>
         </section>
 
-        <!-- Species Grid Container -->
+        <!-- Species Grid -->
         <section>
             <div id="species-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Dynamic Species Cards -->
+                <!-- Cards render here -->
             </div>
         </section>
 
@@ -153,29 +161,44 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-stone-200 py-6 text-center text-xs text-stone-400 mt-auto">
-        Heartopia Companion Tool • Active Radar & Checklist
+        Heartopia Companion Tool • All Main Categories & Sub-Categories
     </footer>
 
     <!-- JavaScript Logic -->
     <script>
-        // Expanded Heartopia Wildlife Database
+        // Sub-categories mapping per main category
+        const subCategories = {
+            "Bird": ["Songbird", "Waterfowl", "Raptor & Owl"],
+            "Insect": ["Butterfly & Moth", "Beetle & Bee", "Dragonfly & Bug"],
+            "Fish": ["Freshwater Fish", "Ocean Fish", "Rare / Exotic Fish"],
+            "Flora": ["Wild Flower", "Mushroom & Fungi", "Berry & Herb"]
+        };
+
+        // Expanded Heartopia Multi-Category Database
         const speciesData = [
             // Birds
-            { id: "b1", name: "Eurasian Tree Sparrow", category: "Bird", weather: "Sunny", time: "Daytime", location: "Town Square", rarity: 1, icon: "🐤" },
-            { id: "b2", name: "Barn Swallow", category: "Bird", weather: "Sunny", time: "Morning", location: "Flower Fields", rarity: 2, icon: "🐦" },
-            { id: "b3", name: "Blue Jay", category: "Bird", weather: "Sunny", time: "Daytime", location: "Forest Area", rarity: 3, icon: "🦤" },
-            { id: "b4", name: "Night Owl", category: "Bird", weather: "Sunny", time: "Night", location: "Deep Woods", rarity: 4, icon: "🦉" },
-            { id: "b5", name: "Rainy Kingfisher", category: "Bird", weather: "Rainy", time: "Daytime", location: "Lake Side", rarity: 4, icon: "🐧" },
-            { id: "b6", name: "Rainbow Flamingo", category: "Bird", weather: "Rainbow", time: "Daytime", location: "Beach Coast", rarity: 5, icon: "🦩" },
-            { id: "b7", name: "Golden Peafowl", category: "Bird", weather: "Sunny", time: "Morning", location: "Mountain Peak", rarity: 5, icon: "🦚" },
+            { id: "b1", name: "Tree Sparrow", category: "Bird", subCategory: "Songbird", weather: "Sunny", time: "Daytime", location: "Town Square", rarity: 1, icon: "🐤" },
+            { id: "b2", name: "Barn Swallow", category: "Bird", subCategory: "Songbird", weather: "Sunny", time: "Morning", location: "Flower Fields", rarity: 2, icon: "🐦" },
+            { id: "b3", name: "Night Owl", category: "Bird", subCategory: "Raptor & Owl", weather: "Sunny", time: "Night", location: "Deep Woods", rarity: 4, icon: "🦉" },
+            { id: "b4", name: "Rainy Kingfisher", category: "Bird", subCategory: "Waterfowl", weather: "Rainy", time: "Daytime", location: "Lake Side", rarity: 4, icon: "🐧" },
+            { id: "b5", name: "Rainbow Flamingo", category: "Bird", subCategory: "Waterfowl", weather: "Rainbow", time: "Daytime", location: "Beach Coast", rarity: 5, icon: "🦩" },
             
             // Insects
-            { id: "i1", name: "Cabbage Butterfly", category: "Insect", weather: "Sunny", time: "Daytime", location: "Garden Fields", rarity: 1, icon: "🦋" },
-            { id: "i2", name: "Honeybee", category: "Insect", weather: "Sunny", time: "Morning", location: "Flower Farm", rarity: 2, icon: "🐝" },
-            { id: "i3", name: "Rainy Dragonfly", category: "Insect", weather: "Rainy", time: "Daytime", location: "River Bank", rarity: 3, icon: "🦗" },
-            { id: "i4", name: "Firefly", category: "Insect", weather: "Sunny", time: "Night", location: "Lake Woods", rarity: 3, icon: "🪲" },
-            { id: "i5", name: "Rainbow Stag Beetle", category: "Insect", weather: "Rainbow", time: "Night", location: "Ancient Tree", rarity: 5, icon: "🐞" },
-            { id: "i6", name: "Golden Monarch", category: "Insect", weather: "Sunny", time: "Morning", location: "Rose Garden", rarity: 5, icon: "🦋" }
+            { id: "i1", name: "Cabbage Butterfly", category: "Insect", subCategory: "Butterfly & Moth", weather: "Sunny", time: "Daytime", location: "Garden Fields", rarity: 1, icon: "🦋" },
+            { id: "i2", name: "Honeybee", category: "Insect", subCategory: "Beetle & Bee", weather: "Sunny", time: "Morning", location: "Flower Farm", rarity: 2, icon: "🐝" },
+            { id: "i3", name: "Rainy Dragonfly", category: "Insect", subCategory: "Dragonfly & Bug", weather: "Rainy", time: "Daytime", location: "River Bank", rarity: 3, icon: "🦗" },
+            { id: "i4", name: "Rainbow Stag Beetle", category: "Insect", subCategory: "Beetle & Bee", weather: "Rainbow", time: "Night", location: "Ancient Tree", rarity: 5, icon: "🐞" },
+
+            // Fish
+            { id: "f1", name: "River Bass", category: "Fish", subCategory: "Freshwater Fish", weather: "Sunny", time: "Daytime", location: "Main River", rarity: 1, icon: "🐟" },
+            { id: "f2", name: "Ocean Clownfish", category: "Fish", subCategory: "Ocean Fish", weather: "Sunny", time: "Daytime", location: "Sea Coral", rarity: 2, icon: "🐠" },
+            { id: "f3", name: "Rainy Catfish", category: "Fish", subCategory: "Freshwater Fish", weather: "Rainy", time: "Night", location: "Swamp Lake", rarity: 3, icon: "🐟" },
+            { id: "f4", name: "Golden Koi", category: "Fish", subCategory: "Rare / Exotic Fish", weather: "Rainbow", time: "Morning", location: "Mountain Pond", rarity: 5, icon: "🐡" },
+
+            // Flora
+            { id: "l1", name: "Wild Daisy", category: "Flora", subCategory: "Wild Flower", weather: "Sunny", time: "Daytime", location: "Grassy Plains", rarity: 1, icon: "🌼" },
+            { id: "l2", name: "Rainy Truffle", category: "Flora", subCategory: "Mushroom & Fungi", weather: "Rainy", time: "Night", location: "Oak Tree Base", rarity: 4, icon: "🍄" },
+            { id: "l3", name: "Rainbow Orchid", category: "Flora", subCategory: "Wild Flower", weather: "Rainbow", time: "Morning", location: "Cliff Edge", rarity: 5, icon: "🌺" }
         ];
 
         let caughtIds = new Set(JSON.parse(localStorage.getItem('heartopia_caught_ids') || '[]'));
@@ -185,6 +208,7 @@
         const grid = document.getElementById('species-grid');
         const searchInput = document.getElementById('search-input');
         const categoryFilter = document.getElementById('category-filter');
+        const subcategoryFilter = document.getElementById('subcategory-filter');
         const statusFilter = document.getElementById('status-filter');
         const simWeather = document.getElementById('sim-weather');
         const simTime = document.getElementById('sim-time');
@@ -193,6 +217,22 @@
         const progressBar = document.getElementById('progress-bar');
         const progressText = document.getElementById('progress-text');
         const progressPercent = document.getElementById('progress-percent');
+
+        // Dynamically populate sub-category dropdown when main category changes
+        function handleCategoryChange() {
+            const selectedCat = categoryFilter.value;
+            subcategoryFilter.innerHTML = '<option value="all">All Sub-Categories</option>';
+
+            if (selectedCat !== 'all' && subCategories[selectedCat]) {
+                subCategories[selectedCat].forEach(sub => {
+                    const opt = document.createElement('option');
+                    opt.value = sub;
+                    opt.innerText = sub;
+                    subcategoryFilter.appendChild(opt);
+                });
+            }
+            renderCards();
+        }
 
         function toggleActiveFilter() {
             activeOnlyFilter = !activeOnlyFilter;
@@ -227,6 +267,7 @@
 
             const searchTerm = searchInput.value.toLowerCase().trim();
             const categoryVal = categoryFilter.value;
+            const subCategoryVal = subcategoryFilter.value;
             const statusVal = statusFilter.value;
 
             const filtered = speciesData.filter(item => {
@@ -235,6 +276,7 @@
                 
                 const matchesSearch = item.name.toLowerCase().includes(searchTerm) || item.location.toLowerCase().includes(searchTerm);
                 const matchesCategory = categoryVal === 'all' || item.category === categoryVal;
+                const matchesSubCategory = subCategoryVal === 'all' || item.subCategory === subCategoryVal;
                 
                 let matchesStatus = true;
                 if (statusVal === 'caught') matchesStatus = isCaught;
@@ -243,15 +285,15 @@
                 let matchesActiveOnly = true;
                 if (activeOnlyFilter) matchesActiveOnly = isActive;
 
-                return matchesSearch && matchesCategory && matchesStatus && matchesActiveOnly;
+                return matchesSearch && matchesCategory && matchesSubCategory && matchesStatus && matchesActiveOnly;
             });
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full py-12 text-center text-stone-400 bg-white rounded-2xl border border-stone-200 shadow-sm">
                         <p class="text-3xl mb-2">📡</p>
-                        <p class="text-sm font-medium">No creatures match your current radar condition.</p>
-                        <p class="text-xs text-stone-400 mt-1">Try changing weather, time, or turning off 'Active Right Now'.</p>
+                        <p class="text-sm font-medium">No items match your current search/radar settings.</p>
+                        <p class="text-xs text-stone-400 mt-1">Try resetting sub-category filters or turning off 'Active Right Now'.</p>
                     </div>
                 `;
                 return;
@@ -277,7 +319,7 @@
                 card.className = `bg-white rounded-2xl p-5 border shadow-sm card-hover relative transition-all ${borderClass}`;
                 
                 card.innerHTML = `
-                    <!-- Active Radar Status Badge -->
+                    <!-- Active Badge -->
                     <div class="flex items-center justify-between mb-3">
                         ${isActive ? 
                             `<span class="inline-flex items-center gap-1 text-[10px] font-black uppercase bg-amber-500 text-white px-2 py-0.5 rounded-full pulse-active">
@@ -296,7 +338,10 @@
                             </div>
                             <div>
                                 <h3 class="font-bold text-stone-800 text-base leading-tight">${item.name}</h3>
-                                <span class="text-xs text-stone-400 font-medium">${item.category}</span>
+                                <div class="flex items-center gap-1.5 mt-0.5">
+                                    <span class="text-[10px] font-semibold bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded">${item.category}</span>
+                                    <span class="text-[10px] text-stone-400">${item.subCategory}</span>
+                                </div>
                             </div>
                         </div>
                         
@@ -336,7 +381,7 @@
         function updateProgress() {
             const total = speciesData.length;
             const count = caughtIds.size;
-            const percentage = Math.round((count / total) * 100);
+            const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
 
             progressText.innerText = `${count} / ${total}`;
             progressPercent.innerText = `(${percentage}%)`;
@@ -345,8 +390,6 @@
 
         // Event Listeners
         searchInput.addEventListener('input', renderCards);
-        categoryFilter.addEventListener('change', renderCards);
-        statusFilter.addEventListener('change', renderCards);
 
         // Initial setup
         updateProgress();
