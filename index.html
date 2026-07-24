@@ -31,10 +31,10 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-2">
                 <span class="text-2xl">🏡</span>
-                <h1 class="text-xl font-bold text-stone-800 tracking-wide">Heartopia Companion Hub</h1>
+                <h1 class="text-xl font-bold text-stone-800 tracking-wide">Heartopia Hub</h1>
             </div>
             
-            <!-- Global Language Selector (Only on Home Page) -->
+            <!-- Full 20-Language Selector -->
             <div class="flex items-center gap-2 text-sm">
                 <span>🌐</span>
                 <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-stone-100 border border-stone-300 rounded-lg px-2 py-1 focus:outline-none text-xs md:text-sm font-medium">
@@ -44,6 +44,20 @@
                     <option value="ko">한국어 (Korean)</option>
                     <option value="es">Español (Spanish)</option>
                     <option value="fr">Français (French)</option>
+                    <option value="de">Deutsch (German)</option>
+                    <option value="pt">Português (Portuguese)</option>
+                    <option value="ru">Русский (Russian)</option>
+                    <option value="it">Italiano (Italian)</option>
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="th">ไทย (Thai)</option>
+                    <option value="vi">Tiếng Việt (Vietnamese)</option>
+                    <option value="tr">Türkçe (Turkish)</option>
+                    <option value="nl">Nederlands (Dutch)</option>
+                    <option value="pl">Polski (Polish)</option>
+                    <option value="ar">العربية (Arabic)</option>
+                    <option value="ms">Bahasa Melayu</option>
+                    <option value="sv">Svenska (Swedish)</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
                 </select>
             </div>
         </div>
@@ -77,13 +91,13 @@
                 </div>
             </a>
 
-            <!-- Card 2: Bird & Biological Radar -->
+            <!-- Card 2: Bird Radar -->
             <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm relative overflow-hidden opacity-90">
-                <div class="absolute top-3 right-3 text-[10px] bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">In Development</div>
+                <div class="absolute top-3 right-3 text-[10px] bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium" id="card2-tag">In Development</div>
                 <div class="space-y-4">
                     <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl font-bold">🦤</div>
                     <div>
-                        <span class="text-xs font-bold text-sky-500 tracking-wider uppercase">Biological Radar</span>
+                        <span class="text-xs font-bold text-sky-500 tracking-wider uppercase" id="card2-status">Biological Radar</span>
                         <h3 class="text-xl font-bold text-stone-800" id="card2-title">Bird & Insect Radar</h3>
                     </div>
                     <p class="text-xs text-stone-500 leading-relaxed" id="card2-desc">Filter rare birds and bugs by real-time in-game weather, current time, and map locations.</p>
@@ -92,11 +106,11 @@
 
             <!-- Card 3: Recipe Profit Calc -->
             <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm relative overflow-hidden opacity-90">
-                <div class="absolute top-3 right-3 text-[10px] bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">In Development</div>
+                <div class="absolute top-3 right-3 text-[10px] bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium" id="card3-tag">In Development</div>
                 <div class="space-y-4">
                     <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold">🍳</div>
                     <div>
-                        <span class="text-xs font-bold text-amber-500 tracking-wider uppercase">Economy Tool</span>
+                        <span class="text-xs font-bold text-amber-500 tracking-wider uppercase" id="card3-status">Economy Tool</span>
                         <h3 class="text-xl font-bold text-stone-800" id="card3-title">Recipe Profit Calc</h3>
                     </div>
                     <p class="text-xs text-stone-500 leading-relaxed" id="card3-desc">Calculate highest-selling dishes and stamina efficiency based on harvested fish and crops.</p>
@@ -110,32 +124,68 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-stone-200 py-6 mt-auto">
         <div class="max-w-6xl mx-auto px-4 text-center text-xs text-stone-400">
-            <p>Heartopia Companion Hub &copy; 2026. Made with ❤️ for Heartopia Gardeners.</p>
+            <p id="footer-text">Heartopia Companion Hub &copy; 2026. Made with ❤️ for Heartopia Gardeners.</p>
         </div>
     </footer>
 
-    <!-- Multilingual Script for Main Portal -->
+    <!-- Full 20-Language Script -->
     <script>
         const i18n = {
             en: {
-                heroBadge: "All-in-One Town Toolkit",
-                heroTitle: "Heartopia Companion Hub",
+                heroBadge: "All-in-One Town Toolkit", heroTitle: "Heartopia Companion Hub",
                 heroSub: "Explore flower genetics, breeding formulas, bird radar, and daily event guides for Heartopia.",
                 card1Status: "Active Tool", card1Title: "Flower Genetics & Breeding Hub", card1Desc: "Complete guide for hybrid probabilities, rare color routes (Blue, Gold, Purple), watering bonuses, and flower species genetics.", card1Link: "Open Flower Hub",
-                card2Title: "Bird & Insect Radar", card2Desc: "Filter rare birds and bugs by real-time in-game weather, current time, and map locations.",
-                card3Title: "Recipe Profit Calc", card3Desc: "Calculate highest-selling dishes and stamina efficiency based on harvested fish and crops."
+                card2Status: "Biological Radar", card2Title: "Bird & Insect Radar", card2Desc: "Filter rare birds and bugs by real-time in-game weather, current time, and map locations.", card2Tag: "In Development",
+                card3Status: "Economy Tool", card3Title: "Recipe Profit Calc", card3Desc: "Calculate highest-selling dishes and stamina efficiency based on harvested fish and crops.", card3Tag: "In Development",
+                footer: "Heartopia Companion Hub © 2026. Made with ❤️ for Heartopia Gardeners."
             },
             zh: {
-                heroBadge: "心动小镇一站式助手",
-                heroTitle: "心动小镇全能工具站",
+                heroBadge: "心动小镇一站式助手", heroTitle: "心动小镇全能工具站",
                 heroSub: "提供鲜花杂交全基因图鉴、观鸟雷达、烹饪收益计算与天气日历速查。",
                 card1Status: "已有功能", card1Title: "鲜花杂交与全基因图鉴", card1Desc: "涵盖所有花种的杂交概率、稀有配色（黑、蓝、金玫瑰）繁育路径、金水壶及多人在场培育加成。", card1Link: "进入鲜花工具页",
-                card2Title: "观鸟与生物雷达", card2Desc: "根据游戏内实时时间、彩虹/雨天天气和地图地标，精准筛选稀有鸟类与昆虫。",
-                card3Title: "烹饪与料理收益计算器", card3Desc: "输入捕获的鱼类与农作物，一键计算高收益卖价菜谱与体力比。"
+                card2Status: "生态雷达", card2Title: "观鸟与生物雷达", card2Desc: "根据游戏内实时时间、彩虹/雨天天气和地图地标，精准筛选稀有鸟类与昆虫。", card2Tag: "开发中",
+                card3Status: "经济工具", card3Title: "烹饪与料理收益计算器", card3Desc: "输入捕获的鱼类与农作物，一键计算高收益卖价菜谱与体力比。", card3Tag: "开发中",
+                footer: "Heartopia Companion Hub © 2026. 为心动小镇园艺师精心打造。"
+            },
+            ja: {
+                heroBadge: "オールインワンツール", heroTitle: "Heartopia コンパニオンハブ",
+                heroSub: "お花の交配遺伝子図鑑、野鳥レーダー、料理収益計算機を提供します。",
+                card1Status: "利用可能", card1Title: "お花交配＆全遺伝子図鑑", card1Desc: "全お花の交配確率、レアカラー（黒、青、金バラ）の交配ルート、じょうろ効果を網羅。", card1Link: "お花ハブを開く",
+                card2Status: "生態レーダー", card2Title: "野鳥＆昆虫レーダー", card2Desc: "ゲーム内の天気、時間、出現場所からレアな鳥や虫を絞り込みます。", card2Tag: "開発中",
+                card3Status: "経済ツール", card3Title: "料理＆収益計算機", card3Desc: "収穫した魚や作物から最高売价の料理と体力効率を計算します。", card3Tag: "開発中",
+                footer: "Heartopia Companion Hub © 2026. ガーデナーのために心を込めて制作。"
+            },
+            ko: {
+                heroBadge: "올인원 타운 툴킷", heroTitle: "하트토피아 통합 허브",
+                heroSub: "꽃 교배 유전학, 조류 탐지 레이더, 요리 수익 계산기를 제공합니다.",
+                card1Status: "사용 가능", card1Title: "꽃 교배 및 유전자 도감", card1Desc: "모든 꽃의 교배 확률, 희귀 색상(파랑, 금장미) 경로, 물뿌리개 보너스 가이드.", card1Link: "꽃 허브 열기",
+                card2Status: "생태 레이더", card2Title: "조류 및 곤충 레이더", card2Desc: "실시간 날씨, 시간, 위치별 희귀 조류 및 곤충 필터링.", card2Tag: "개발 중",
+                card3Status: "경제 도감", card3Title: "요리 및 수익 계산기", card3Desc: "수확한 물고기와 작물로 최고 판매가 요리 계산.", card3Tag: "개발 중",
+                footer: "Heartopia Companion Hub © 2026. 원예가를 위해 제작되었습니다."
+            },
+            es: {
+                heroBadge: "Herramienta Integral", heroTitle: "Heartopia Hub Companion",
+                heroSub: "Explora genética de flores, radar de aves y calculadora de cocina.",
+                card1Status: "Herramienta Activa", card1Title: "Guía de Genética de Flores", card1Desc: "Probabilidades de hibridación, colores raros (Azul, Oro, Rosa) y regaderas.", card1Link: "Abrir Centro de Flores",
+                card2Status: "Radar Biológico", card2Title: "Radar de Aves e Insectos", card2Desc: "Filtra aves raras por clima, hora y ubicación en el mapa.", card2Tag: "En Desarrollo",
+                card3Status: "Herramienta Económica", card3Title: "Calculadora de Recetas", card3Desc: "Calcula los platos más rentables según tus cultivos y peces.", card3Tag: "En Desarrollo",
+                footer: "Heartopia Companion Hub © 2026. Hecho con ❤️ para jardineros."
+            },
+            fr: {
+                heroBadge: "Boîte à Outils", heroTitle: "Heartopia Companion Hub",
+                heroSub: "Explorez la génétique florale, le radar d'oiseaux et les recettes.",
+                card1Status: "Outil Actif", card1Title: "Guide de Génétique Florale", card1Desc: "Probabilités d'hybridation, couleurs rares (Bleu, Or) et arrosoir d'or.", card1Link: "Ouvrir le Hub Fleurs",
+                card2Status: "Radar Écologique", card2Title: "Radar Oiseaux & Insectes", card2Desc: "Filtrez les oiseaux rares par météo, heure et emplacement.", card2Tag: "En Développement",
+                card3Status: "Économie", card3Title: "Calculateur de Recettes", card3Desc: "Calculez les plats les plus rentables basés sur vos poissons.", card3Tag: "En Développement",
+                footer: "Heartopia Companion Hub © 2026. Fait avec ❤️ pour les jardiniers."
             }
         };
 
         function changeLanguage(lang) {
+            // Save selected language to localStorage for cross-page sync
+            localStorage.setItem('heartopia_lang', lang);
+            document.getElementById('lang-select').value = lang;
+
             const data = i18n[lang] || i18n['en'];
             document.getElementById('hero-badge').innerText = data.heroBadge;
             document.getElementById('hero-title').innerText = data.heroTitle;
@@ -144,11 +194,22 @@
             document.getElementById('card1-title').innerText = data.card1Title;
             document.getElementById('card1-desc').innerText = data.card1Desc;
             document.getElementById('card1-link').innerText = data.card1Link;
+            document.getElementById('card2-status').innerText = data.card2Status;
             document.getElementById('card2-title').innerText = data.card2Title;
             document.getElementById('card2-desc').innerText = data.card2Desc;
+            document.getElementById('card2-tag').innerText = data.card2Tag;
+            document.getElementById('card3-status').innerText = data.card3Status;
             document.getElementById('card3-title').innerText = data.card3Title;
             document.getElementById('card3-desc').innerText = data.card3Desc;
+            document.getElementById('card3-tag').innerText = data.card3Tag;
+            document.getElementById('footer-text').innerText = data.footer;
         }
+
+        // Load saved language on startup
+        window.onload = function() {
+            const savedLang = localStorage.getItem('heartopia_lang') || 'en';
+            changeLanguage(savedLang);
+        };
     </script>
 </body>
 </html>
