@@ -25,23 +25,21 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Header & Navigation with Back Button -->
+    <!-- Header & Navigation -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
             
-            <!-- Return to Main Portal Button -->
             <a href="index.html" class="flex items-center gap-2 text-stone-600 hover:text-stone-900 font-semibold text-sm transition bg-stone-100 hover:bg-stone-200 px-3 py-1.5 rounded-lg border border-stone-200">
                 <span>←</span>
                 <span id="btn-back">Back to Main Hub</span>
             </a>
 
-            <!-- Tab Buttons -->
             <nav class="flex gap-6 text-sm md:text-base font-medium">
                 <button onclick="switchTab('calculator')" id="tab-btn-calculator" class="py-2 px-1 tab-active transition-all flex items-center gap-1">
                     🧪 <span id="nav-calc">Hybrid Simulator</span>
                 </button>
                 <button onclick="switchTab('encyclopedia')" id="tab-btn-encyclopedia" class="py-2 px-1 text-stone-500 hover:text-stone-800 transition-all flex items-center gap-1">
-                    📖 <span id="nav-enc">Flower Encyclopedia</span>
+                    📖 <span id="nav-enc">All 8 Flowers Genetics</span>
                 </button>
             </nav>
         </div>
@@ -50,7 +48,7 @@
     <!-- Main Content -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 space-y-8">
 
-        <!-- Gameplay Mechanics Tip Card -->
+        <!-- Gameplay Tip -->
         <section class="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-4 text-xs text-amber-900 space-y-2">
             <div class="font-bold text-sm flex items-center gap-1.5 text-amber-800" id="tip-title">
                 <span>💡</span> Heartopia Breeding Key Rules:
@@ -69,7 +67,6 @@
                 <p class="text-stone-500 text-sm" id="calc-sub">Select species and colors for parent flowers to calculate expected hybrid offspring and probabilities.</p>
             </div>
 
-            <!-- Calculator Inputs Panel -->
             <div class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
                 <!-- Parent A -->
                 <div class="space-y-4 p-4 rounded-xl bg-amber-50/50 border border-amber-100">
@@ -77,10 +74,14 @@
                     <div>
                         <label class="block text-xs font-medium text-stone-600 mb-1" id="species-a-label">Species</label>
                         <select id="parentA-species" class="w-full p-2 rounded-lg border border-stone-200 bg-white" onchange="calculateBreed()">
-                            <option value="pansy">Pansy</option>
-                            <option value="tulip">Tulip</option>
-                            <option value="rose">Rose</option>
-                            <option value="bellflower">Bellflower</option>
+                            <option value="pansy">Pansy (三色堇)</option>
+                            <option value="rose">Rose (玫瑰)</option>
+                            <option value="tulip">Tulip (郁金香)</option>
+                            <option value="bellflower">Bellflower (风铃草)</option>
+                            <option value="daisy">Daisy (雏菊)</option>
+                            <option value="sunflower">Sunflower (向日葵)</option>
+                            <option value="hydrangea">Hydrangea (绣球花)</option>
+                            <option value="lily">Lily (百合)</option>
                         </select>
                     </div>
                     <div>
@@ -101,10 +102,14 @@
                     <div>
                         <label class="block text-xs font-medium text-stone-600 mb-1" id="species-b-label">Species</label>
                         <select id="parentB-species" class="w-full p-2 rounded-lg border border-stone-200 bg-white" onchange="calculateBreed()">
-                            <option value="pansy">Pansy</option>
-                            <option value="tulip">Tulip</option>
-                            <option value="rose">Rose</option>
-                            <option value="bellflower">Bellflower</option>
+                            <option value="pansy">Pansy (三色堇)</option>
+                            <option value="rose">Rose (玫瑰)</option>
+                            <option value="tulip">Tulip (郁金香)</option>
+                            <option value="bellflower">Bellflower (风铃草)</option>
+                            <option value="daisy">Daisy (雏菊)</option>
+                            <option value="sunflower">Sunflower (向日葵)</option>
+                            <option value="hydrangea">Hydrangea (绣球花)</option>
+                            <option value="lily">Lily (百合)</option>
                         </select>
                     </div>
                     <div>
@@ -120,64 +125,179 @@
                 </div>
             </div>
 
-            <!-- Calculation Output -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 space-y-4">
                 <h3 class="font-bold text-stone-800 text-lg flex items-center gap-2" id="results-label">🎯 Estimated Hybrid Outcomes</h3>
-                <div id="results-container" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <!-- Dynamic Content -->
-                </div>
+                <div id="results-container" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
             </div>
         </section>
 
-        <!-- ==================== TAB 2: ENCYCLOPEDIA ==================== -->
+        <!-- ==================== TAB 2: ALL 8 FLOWERS ENCYCLOPEDIA ==================== -->
         <section id="tab-encyclopedia" class="hidden space-y-8">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <h2 class="text-2xl font-bold text-stone-800">Flower Genetics Encyclopedia</h2>
-                <p class="text-stone-500 text-sm">Detailed guide for seed shop basics, hybrid probabilities, and special conditions.</p>
+                <h2 class="text-2xl font-bold text-stone-800">All 8 Flower Species Genetics</h2>
+                <p class="text-stone-500 text-sm">Comprehensive breeding chart for every flower in Heartopia.</p>
             </div>
 
-            <!-- Cards Grid -->
-            <div id="encyclopedia-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Pansy Card -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+                <!-- 1. Pansy -->
                 <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-bold text-stone-800">Pansy (三色堇)</h3>
-                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">Starter Flower</span>
+                            <h3 class="text-lg font-bold text-stone-800">1. Pansy (三色堇)</h3>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">Starter</span>
                         </div>
                         <span class="text-3xl">🌸</span>
                     </div>
                     <div class="text-xs space-y-1.5 text-stone-600">
-                        <p><strong>Base Colors (Seeds):</strong> Red, Yellow, White</p>
+                        <p><strong>Seed Store Base:</strong> Red, Yellow, White</p>
                         <p><strong>Hybrid Formulas:</strong></p>
                         <ul class="list-disc list-inside space-y-1 text-stone-700">
-                            <li><span class="text-orange-500 font-bold">Orange:</span> Red + Yellow (~50%)</li>
+                            <li><span class="text-amber-600 font-bold">Orange:</span> Red + Yellow (~50%)</li>
                             <li><span class="text-sky-500 font-bold">Blue:</span> White + White (~25%)</li>
                             <li><span class="text-purple-600 font-bold">Purple:</span> Blue + Blue OR Red + Blue (~15%)</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Rose Card -->
+                <!-- 2. Rose -->
                 <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-bold text-stone-800">Rose (玫瑰)</h3>
-                            <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full font-medium">Legendary / Rare</span>
+                            <h3 class="text-lg font-bold text-stone-800">2. Rose (玫瑰)</h3>
+                            <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full font-medium">Advanced</span>
                         </div>
                         <span class="text-3xl">🌹</span>
                     </div>
                     <div class="text-xs space-y-1.5 text-stone-600">
-                        <p><strong>Base Colors (Seeds):</strong> Red, Yellow, White</p>
+                        <p><strong>Seed Store Base:</strong> Red, Yellow, White</p>
                         <p><strong>Hybrid Formulas:</strong></p>
                         <ul class="list-disc list-inside space-y-1 text-stone-700">
                             <li><span class="text-pink-500 font-bold">Pink:</span> Red + White (50%)</li>
                             <li><span class="text-stone-800 font-bold">Black:</span> Red + Red (25%)</li>
                             <li><span class="text-blue-600 font-bold">Blue Rose:</span> Hybrid Red + Hybrid Red (~10%)</li>
-                            <li><span class="text-amber-500 font-bold">Gold Rose:</span> Black + Black watered with <strong>Gold Water Can</strong></li>
+                            <li><span class="text-amber-500 font-bold">Gold Rose:</span> Black + Black (Gold Can Required)</li>
                         </ul>
                     </div>
                 </div>
+
+                <!-- 3. Tulip -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-stone-800">3. Tulip (郁金香)</h3>
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-medium">Starter</span>
+                        </div>
+                        <span class="text-3xl">🌷</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-stone-600">
+                        <p><strong>Seed Store Base:</strong> Red, Yellow, White</p>
+                        <p><strong>Hybrid Formulas:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><span class="text-amber-600 font-bold">Orange:</span> Red + Yellow (~50%)</li>
+                            <li><span class="text-pink-500 font-bold">Pink:</span> Red + White (~50%)</li>
+                            <li><span class="text-purple-600 font-bold">Purple:</span> Orange + Orange (~12.5%)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. Bellflower -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-stone-800">4. Bellflower (风铃草)</h3>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full font-medium">Intermediate</span>
+                        </div>
+                        <span class="text-3xl">🔔</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-stone-600">
+                        <p><strong>Seed Store Base:</strong> Blue, White</p>
+                        <p><strong>Hybrid Formulas:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><span class="text-indigo-400 font-bold">Light Blue:</span> Blue + White (~50%)</li>
+                            <li><span class="text-purple-600 font-bold">Purple:</span> Blue + Blue (~25%)</li>
+                            <li><span class="text-pink-500 font-bold">Pink Bellflower:</span> Light Blue + Purple (~15%)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. Daisy -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-stone-800">5. Daisy (雏菊)</h3>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">Starter</span>
+                        </div>
+                        <span class="text-3xl">🌼</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-stone-600">
+                        <p><strong>Seed Store Base:</strong> Yellow, White</p>
+                        <p><strong>Hybrid Formulas:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><span class="text-amber-500 font-bold">Cream:</span> Yellow + White (~50%)</li>
+                            <li><span class="text-pink-400 font-bold">Soft Pink:</span> White + White (~25%)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. Sunflower -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-stone-800">6. Sunflower (向日葵)</h3>
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-medium">Summer Special</span>
+                        </div>
+                        <span class="text-3xl">🌻</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-stone-600">
+                        <p><strong>Seed Store Base:</strong> Yellow</p>
+                        <p><strong>Hybrid Formulas:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><span class="text-amber-700 font-bold">Bronze:</span> Yellow + Yellow Mutated (~20%)</li>
+                            <li><span class="text-red-600 font-bold">Ruby Red Sunflower:</span> Bronze + Bronze (~10%)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 7. Hydrangea -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-stone-800">7. Hydrangea (绣球花)</h3>
+                            <span class="text-xs bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full font-medium">Rainy Season</span>
+                        </div>
+                        <span class="text-3xl">🪻</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-stone-600">
+                        <p><strong>Seed Store Base:</strong> Blue, Pink</p>
+                        <p><strong>Hybrid Formulas:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><span class="text-purple-500 font-bold">Purple:</span> Blue + Pink (~50%)</li>
+                            <li><span class="text-stone-100 bg-stone-700 px-1 rounded font-bold">White Hydrangea:</span> Purple + Purple (~15%)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 8. Lily -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-stone-800">8. Lily (百合)</h3>
+                            <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full font-medium">Rare</span>
+                        </div>
+                        <span class="text-3xl">🪷</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-stone-600">
+                        <p><strong>Seed Store Base:</strong> Red, Yellow, White</p>
+                        <p><strong>Hybrid Formulas:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><span class="text-pink-500 font-bold">Pink:</span> Red + White (~50%)</li>
+                            <li><span class="text-amber-600 font-bold">Orange:</span> Red + Yellow (~50%)</li>
+                            <li><span class="text-stone-900 text-white bg-black px-1 rounded font-bold">Black Lily:</span> Red + Red (~25%)</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -190,44 +310,44 @@
         </div>
     </footer>
 
-    <!-- Multilingual Sync Script for Flowers Page -->
+    <!-- Multilingual Sync Script -->
     <script>
         const flowerI18n = {
             en: {
-                btnBack: "Back to Main Hub", navCalc: "Hybrid Simulator", navEnc: "Flower Encyclopedia",
+                btnBack: "Back to Main Hub", navCalc: "Hybrid Simulator", navEnc: "All 8 Flowers Genetics",
                 tipTitle: "💡 Heartopia Breeding Key Rules:",
                 calcTitle: "Flower Hybrid Simulator", calcSub: "Select species and colors for parent flowers to calculate expected hybrid offspring and probabilities.",
                 parentA: "🌸 Parent A", parentB: "🌺 Parent B", species: "Species", color: "Color", results: "🎯 Estimated Hybrid Outcomes"
             },
             zh: {
-                btnBack: "返回主页", navCalc: "杂交模拟计算器", navEnc: "鲜花全基因图鉴",
+                btnBack: "返回主页", navCalc: "杂交模拟计算器", navEnc: "8大鲜花全基因图鉴",
                 tipTitle: "💡 心动小镇育种核心规则:",
                 calcTitle: "鲜花杂交模拟器", calcSub: "选择两朵亲本花的品种与颜色，推算下一代可能产出的新花色及概率。",
                 parentA: "🌸 亲本 A", parentB: "🌺 亲本 B", species: "花种", color: "颜色", results: "🎯 预测杂交结果"
             },
+            'zh-TW': {
+                btnBack: "返回主頁", navCalc: "雜交模擬計算器", navEnc: "8大鮮花全基因圖鑑",
+                tipTitle: "💡 心動小鎮育種核心規則:",
+                calcTitle: "鮮花雜交模擬器", calcSub: "選擇兩朵親本花的品種與顏色，推算下一代可能產出的新花色及概率。",
+                parentA: "🌸 親本 A", parentB: "🌺 親本 B", species: "花種", color: "顏色", results: "🎯 預測雜交結果"
+            },
             ja: {
-                btnBack: "メインハブに戻る", navCalc: "交配シミュレーター", navEnc: "お花図鑑",
+                btnBack: "メインハブに戻る", navCalc: "交配シミュレーター", navEnc: "全8種お花図鑑",
                 tipTitle: "💡 交配の重要ルール:",
                 calcTitle: "お花交配シミュレーター", calcSub: "親となるお花の種類と色を選択し、交配結果と確率を計算します。",
                 parentA: "🌸 親 A", parentB: "🌺 親 B", species: "種類", color: "色", results: "🎯 予想交配結果"
             },
             ko: {
-                btnBack: "메인 허브로 돌아가기", navCalc: "교배 시뮬레이터", navEnc: "꽃 백과사전",
+                btnBack: "메인 허브로 돌아가기", navCalc: "교배 시뮬레이터", navEnc: "전 8종 꽃 백과사전",
                 tipTitle: "💡 교배 핵심 규칙:",
                 calcTitle: "꽃 교배 시뮬레이터", calcSub: "부모 꽃의 종류와 색상을 선택하여 예상 자손과 확률을 계산합니다.",
                 parentA: "🌸 부모 A", parentB: "🌺 부모 B", species: "품종", color: "색상", results: "🎯 예상 교배 결과"
             },
             es: {
-                btnBack: "Volver al Hub Principal", navCalc: "Simulador de Híbridos", navEnc: "Enciclopedia de Flores",
+                btnBack: "Volver al Hub Principal", navCalc: "Simulador de Híbridos", navEnc: "Enciclopedia (8 Flores)",
                 tipTitle: "💡 Reglas Clave de Cría:",
                 calcTitle: "Simulador de Hibridación", calcSub: "Selecciona las flores progenitoras para calcular los resultados esperados.",
                 parentA: "🌸 Progenitor A", parentB: "🌺 Progenitor B", species: "Especie", color: "Color", results: "🎯 Resultados Estimados"
-            },
-            fr: {
-                btnBack: "Retour au Hub Principal", navCalc: "Simulateur d'Hybridation", navEnc: "Encyclopédie Florale",
-                tipTitle: "💡 Règles Clés d'Hybridation:",
-                calcTitle: "Simulateur d'Hybridation", calcSub: "Sélectionnez les fleurs parents pour calculer les probabilités.",
-                parentA: "🌸 Parent A", parentB: "🌺 Parent B", species: "Espèce", color: "Couleur", results: "🎯 Résultats Estimés"
             }
         };
 
