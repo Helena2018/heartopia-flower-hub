@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heartopia Flower Hub | 心动小镇鲜花全百科与工具箱</title>
+    <title>Heartopia Flower Hub | Companion & Breeding Guide</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,27 +33,43 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
             <div class="flex items-center gap-2">
                 <span class="text-2xl">🌸</span>
-                <h1 class="text-xl font-bold tracking-wide text-stone-800" id="site-title">Heartopia Flower Hub</h1>
+                <h1 class="text-xl font-bold tracking-wide text-stone-800">Heartopia Flower Hub</h1>
             </div>
 
             <!-- Tab Buttons -->
             <nav class="flex gap-6 text-sm md:text-base font-medium">
-                <button onclick="switchTab('calculator')" id="tab-btn-calculator" class="py-2 px-1 tab-active transition-all">
-                    🧪 <span id="nav-calc">杂交计算器</span>
+                <button onclick="switchTab('calculator')" id="tab-btn-calculator" class="py-2 px-1 tab-active transition-all flex items-center gap-1">
+                    🧪 <span id="nav-calc">Hybrid Calculator</span>
                 </button>
-                <button onclick="switchTab('encyclopedia')" id="tab-btn-encyclopedia" class="py-2 px-1 text-stone-500 hover:text-stone-800 transition-all">
-                    📖 <span id="nav-encyclopedia">鲜花全图鉴</span>
+                <button onclick="switchTab('encyclopedia')" id="tab-btn-encyclopedia" class="py-2 px-1 text-stone-500 hover:text-stone-800 transition-all flex items-center gap-1">
+                    📖 <span id="nav-encyclopedia">Flower Encyclopedia</span>
                 </button>
             </nav>
 
-            <!-- Language Selector -->
+            <!-- 20-Language Selector (Default: English) -->
             <div class="flex items-center gap-2 text-sm">
                 <span>🌐</span>
-                <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-stone-100 border border-stone-300 rounded-lg px-2 py-1 focus:outline-none text-xs md:text-sm">
-                    <option value="zh">中文</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                    <option value="ko">한국어</option>
+                <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-stone-100 border border-stone-300 rounded-lg px-2 py-1 focus:outline-none text-xs md:text-sm font-medium">
+                    <option value="en" selected>English</option>
+                    <option value="zh">中文 (Chinese)</option>
+                    <option value="ja">日本語 (Japanese)</option>
+                    <option value="ko">한국어 (Korean)</option>
+                    <option value="es">Español (Spanish)</option>
+                    <option value="fr">Français (French)</option>
+                    <option value="de">Deutsch (German)</option>
+                    <option value="pt">Português (Portuguese)</option>
+                    <option value="ru">Русский (Russian)</option>
+                    <option value="it">Italiano (Italian)</option>
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="th">ไทย (Thai)</option>
+                    <option value="vi">Tiếng Việt (Vietnamese)</option>
+                    <option value="tr">Türkçe (Turkish)</option>
+                    <option value="nl">Nederlands (Dutch)</option>
+                    <option value="pl">Polski (Polish)</option>
+                    <option value="ar">العربية (Arabic)</option>
+                    <option value="ms">Bahasa Melayu</option>
+                    <option value="sv">Svenska (Swedish)</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
                 </select>
             </div>
         </div>
@@ -65,54 +81,54 @@
         <!-- ==================== TAB 1: CALCULATOR ==================== -->
         <section id="tab-calculator" class="space-y-8">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <h2 class="text-2xl font-bold text-stone-800" id="calc-heading">鲜花杂交模拟计算器</h2>
-                <p class="text-stone-500 text-sm" id="calc-sub">选择两朵亲本花的品种与颜色，即刻推算下一代可能产出的新花色及概率。</p>
+                <h2 class="text-2xl font-bold text-stone-800" id="calc-heading">Flower Hybrid Simulator</h2>
+                <p class="text-stone-500 text-sm" id="calc-sub">Select species and colors for parent flowers to calculate expected hybrid offspring and probabilities.</p>
             </div>
 
             <!-- Calculator Inputs Panel -->
             <div class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
-                <!-- Flower A -->
+                <!-- Parent A -->
                 <div class="space-y-4 p-4 rounded-xl bg-amber-50/50 border border-amber-100">
-                    <h3 class="font-semibold text-amber-800 flex items-center gap-2">🌸 亲本 A (Parent 1)</h3>
+                    <h3 class="font-semibold text-amber-800 flex items-center gap-2" id="label-parent-a">🌸 Parent A</h3>
                     <div>
-                        <label class="block text-xs font-medium text-stone-600 mb-1">花种</label>
+                        <label class="block text-xs font-medium text-stone-600 mb-1" id="label-species-a">Species</label>
                         <select id="parentA-species" class="w-full p-2 rounded-lg border border-stone-200 bg-white" onchange="calculateBreed()">
-                            <option value="pansy">三色堇 (Pansy)</option>
-                            <option value="tulip">郁金香 (Tulip)</option>
-                            <option value="rose">玫瑰 (Rose)</option>
-                            <option value="bellflower">风铃草 (Bellflower)</option>
+                            <option value="pansy">Pansy</option>
+                            <option value="tulip">Tulip</option>
+                            <option value="rose">Rose</option>
+                            <option value="bellflower">Bellflower</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-stone-600 mb-1">颜色</label>
+                        <label class="block text-xs font-medium text-stone-600 mb-1" id="label-color-a">Color</label>
                         <select id="parentA-color" class="w-full p-2 rounded-lg border border-stone-200 bg-white" onchange="calculateBreed()">
-                            <option value="red">红色 (Red)</option>
-                            <option value="yellow">黄色 (Yellow)</option>
-                            <option value="white">白色 (White)</option>
-                            <option value="pink">粉色 (Pink)</option>
+                            <option value="red">Red</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="white">White</option>
+                            <option value="pink">Pink</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Flower B -->
+                <!-- Parent B -->
                 <div class="space-y-4 p-4 rounded-xl bg-rose-50/50 border border-rose-100">
-                    <h3 class="font-semibold text-rose-800 flex items-center gap-2">🌺 亲本 B (Parent 2)</h3>
+                    <h3 class="font-semibold text-rose-800 flex items-center gap-2" id="label-parent-b">🌺 Parent B</h3>
                     <div>
-                        <label class="block text-xs font-medium text-stone-600 mb-1">花种</label>
+                        <label class="block text-xs font-medium text-stone-600 mb-1" id="label-species-b">Species</label>
                         <select id="parentB-species" class="w-full p-2 rounded-lg border border-stone-200 bg-white" onchange="calculateBreed()">
-                            <option value="pansy">三色堇 (Pansy)</option>
-                            <option value="tulip">郁金香 (Tulip)</option>
-                            <option value="rose">玫瑰 (Rose)</option>
-                            <option value="bellflower">风铃草 (Bellflower)</option>
+                            <option value="pansy">Pansy</option>
+                            <option value="tulip">Tulip</option>
+                            <option value="rose">Rose</option>
+                            <option value="bellflower">Bellflower</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-stone-600 mb-1">颜色</label>
+                        <label class="block text-xs font-medium text-stone-600 mb-1" id="label-color-b">Color</label>
                         <select id="parentB-color" class="w-full p-2 rounded-lg border border-stone-200 bg-white" onchange="calculateBreed()">
-                            <option value="yellow">黄色 (Yellow)</option>
-                            <option value="red">红色 (Red)</option>
-                            <option value="white">白色 (White)</option>
-                            <option value="blue">蓝色 (Blue)</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="red">Red</option>
+                            <option value="white">White</option>
+                            <option value="blue">Blue</option>
                         </select>
                     </div>
                 </div>
@@ -120,9 +136,9 @@
 
             <!-- Calculation Output -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 space-y-4">
-                <h3 class="font-bold text-stone-800 text-lg flex items-center gap-2">🎯 预测杂交结果 (Results)</h3>
+                <h3 class="font-bold text-stone-800 text-lg flex items-center gap-2" id="label-results">🎯 Estimated Hybrid Outcomes</h3>
                 <div id="results-container" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <!-- Dynamic JS content goes here -->
+                    <!-- Dynamic Content -->
                 </div>
             </div>
         </section>
@@ -130,96 +146,96 @@
         <!-- ==================== TAB 2: ENCYCLOPEDIA ==================== -->
         <section id="tab-encyclopedia" class="hidden space-y-8">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <h2 class="text-2xl font-bold text-stone-800" id="enc-heading">鲜花基因全图鉴</h2>
-                <p class="text-stone-500 text-sm" id="enc-sub">查阅心动小镇全花种的颜色分类、获取难度以及稀有配色的繁育路径。</p>
+                <h2 class="text-2xl font-bold text-stone-800" id="enc-heading">Flower Genetics Encyclopedia</h2>
+                <p class="text-stone-500 text-sm" id="enc-sub">Browse full flower genetics, obtainability, and breeding paths for rare colors in Heartopia.</p>
             </div>
 
             <!-- Filter Controls -->
             <div class="flex flex-wrap justify-center gap-2 border-b border-stone-200 pb-4">
-                <button onclick="filterFlowerCards('all')" class="enc-filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-800 text-white">全部花种</button>
-                <button onclick="filterFlowerCards('pansy')" class="enc-filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">三色堇</button>
-                <button onclick="filterFlowerCards('tulip')" class="enc-filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">郁金香</button>
-                <button onclick="filterFlowerCards('rose')" class="enc-filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">玫瑰</button>
-                <button onclick="filterFlowerCards('bellflower')" class="enc-filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">风铃草</button>
+                <button onclick="filterCards('all')" id="btn-filter-all" class="px-4 py-1.5 rounded-full text-sm font-medium bg-stone-800 text-white">All Species</button>
+                <button onclick="filterCards('pansy')" id="btn-filter-pansy" class="px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">Pansy</button>
+                <button onclick="filterCards('tulip')" id="btn-filter-tulip" class="px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">Tulip</button>
+                <button onclick="filterCards('rose')" id="btn-filter-rose" class="px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">Rose</button>
+                <button onclick="filterCards('bellflower')" id="btn-filter-bellflower" class="px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200">Bellflower</button>
             </div>
 
             <!-- Cards Grid -->
             <div id="encyclopedia-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1: Pansy -->
+                <!-- Pansy Card -->
                 <div class="flower-card pansy bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-4 hover:shadow-md transition-shadow">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-bold text-stone-800">三色堇 (Pansy)</h3>
-                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">入门易获得</span>
+                            <h3 class="text-lg font-bold text-stone-800" id="card-pansy-title">Pansy</h3>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full" id="card-pansy-badge">Easy / Starter</span>
                         </div>
                         <span class="text-3xl">🌸</span>
                     </div>
                     <div class="space-y-2 text-xs">
-                        <p class="text-stone-500"><strong>基础色 (种子店直购)：</strong> 红色、黄色、白色</p>
-                        <p class="text-stone-500"><strong>稀有杂交色：</strong></p>
-                        <ul class="list-disc list-inside space-y-1 text-stone-700">
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-orange-400 mr-1"></span> 橙色：红 + 黄 (概率 50%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 mr-1"></span> 紫色：红 + 蓝 (概率 25%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-sky-400 mr-1"></span> 蓝色：白 + 白 (概率 15%)</li>
+                        <p class="text-stone-500"><strong id="card-pansy-base-label">Basic Colors (Seed Shop):</strong> Red, Yellow, White</p>
+                        <p class="text-stone-500"><strong id="card-pansy-rare-label">Rare Hybrids:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700" id="card-pansy-list">
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-orange-400 mr-1"></span> Orange: Red + Yellow (50%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 mr-1"></span> Purple: Red + Blue (25%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-sky-400 mr-1"></span> Blue: White + White (15%)</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Card 2: Tulip -->
+                <!-- Tulip Card -->
                 <div class="flower-card tulip bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-4 hover:shadow-md transition-shadow">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-bold text-stone-800">郁金香 (Tulip)</h3>
-                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">中等难度</span>
+                            <h3 class="text-lg font-bold text-stone-800" id="card-tulip-title">Tulip</h3>
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full" id="card-tulip-badge">Medium Difficulty</span>
                         </div>
                         <span class="text-3xl">🌷</span>
                     </div>
                     <div class="space-y-2 text-xs">
-                        <p class="text-stone-500"><strong>基础色 (种子店直购)：</strong> 红色、黄色</p>
-                        <p class="text-stone-500"><strong>稀有杂交色：</strong></p>
-                        <ul class="list-disc list-inside space-y-1 text-stone-700">
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-pink-400 mr-1"></span> 粉色：红 + 白 (概率 35%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-black mr-1"></span> 黑色：紫 + 紫 (概率 10%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-600 mr-1"></span> 紫色：粉 + 橙 (概率 20%)</li>
+                        <p class="text-stone-500"><strong id="card-tulip-base-label">Basic Colors (Seed Shop):</strong> Red, Yellow</p>
+                        <p class="text-stone-500"><strong id="card-tulip-rare-label">Rare Hybrids:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700" id="card-tulip-list">
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-pink-400 mr-1"></span> Pink: Red + White (35%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-black mr-1"></span> Black: Purple + Purple (10%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-600 mr-1"></span> Purple: Pink + Orange (20%)</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Card 3: Rose -->
+                <!-- Rose Card -->
                 <div class="flower-card rose bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-4 hover:shadow-md transition-shadow">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-bold text-stone-800">玫瑰 (Rose)</h3>
-                            <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full">高难度 / 传说级</span>
+                            <h3 class="text-lg font-bold text-stone-800" id="card-rose-title">Rose</h3>
+                            <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full" id="card-rose-badge">Hard / Legendary</span>
                         </div>
                         <span class="text-3xl">🌹</span>
                     </div>
                     <div class="space-y-2 text-xs">
-                        <p class="text-stone-500"><strong>基础色 (种子店直购)：</strong> 红色、黄色、白色</p>
-                        <p class="text-stone-500"><strong>稀有杂交色：</strong></p>
-                        <ul class="list-disc list-inside space-y-1 text-stone-700">
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-600 mr-1"></span> 金色：黑玫瑰 + 幸运浇水 (概率 5%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-600 mr-1"></span> 蓝色：杂交红 + 杂交红 (概率 10%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-700 mr-1"></span> 紫色：黑 + 蓝 (概率 20%)</li>
+                        <p class="text-stone-500"><strong id="card-rose-base-label">Basic Colors (Seed Shop):</strong> Red, Yellow, White</p>
+                        <p class="text-stone-500"><strong id="card-rose-rare-label">Rare Hybrids:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700" id="card-rose-list">
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-600 mr-1"></span> Gold: Black Rose + Gold Can (5%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-600 mr-1"></span> Blue: Hybrid Red + Hybrid Red (10%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-700 mr-1"></span> Purple: Black + Blue (20%)</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Card 4: Bellflower -->
+                <!-- Bellflower Card -->
                 <div class="flower-card bellflower bg-white rounded-2xl p-5 shadow-sm border border-stone-100 space-y-4 hover:shadow-md transition-shadow">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-bold text-stone-800">风铃草 (Bellflower)</h3>
-                            <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">园艺师解锁</span>
+                            <h3 class="text-lg font-bold text-stone-800" id="card-bellflower-title">Bellflower</h3>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full" id="card-bellflower-badge">Gardener Skill</span>
                         </div>
                         <span class="text-3xl">🔔</span>
                     </div>
                     <div class="space-y-2 text-xs">
-                        <p class="text-stone-500"><strong>基础色 (种子店直购)：</strong> 蓝色、白色</p>
-                        <p class="text-stone-500"><strong>稀有杂交色：</strong></p>
-                        <ul class="list-disc list-inside space-y-1 text-stone-700">
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-400 mr-1"></span> 浅紫：蓝 + 白 (概率 40%)</li>
-                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-pink-300 mr-1"></span> 浅粉：浅紫 + 白 (概率 20%)</li>
+                        <p class="text-stone-500"><strong id="card-bell-base-label">Basic Colors (Seed Shop):</strong> Blue, White</p>
+                        <p class="text-stone-500"><strong id="card-bell-rare-label">Rare Hybrids:</strong></p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700" id="card-bell-list">
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-400 mr-1"></span> Light Purple: Blue + White (40%)</li>
+                            <li><span class="inline-block w-2.5 h-2.5 rounded-full bg-pink-300 mr-1"></span> Light Pink: Light Purple + White (20%)</li>
                         </ul>
                     </div>
                 </div>
@@ -231,13 +247,79 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-stone-200 mt-auto py-6">
         <div class="max-w-6xl mx-auto px-4 text-center text-xs text-stone-400 space-y-2">
-            <p>Heartopia Flower Hub &copy; 2026. Made with ❤️ for Heartopia Gardeners.</p>
-            <p>Designed for GitHub & Cloudflare Pages Open Source Project.</p>
+            <p id="footer-text">Heartopia Flower Hub &copy; 2026. Made with ❤️ for Heartopia Gardeners.</p>
         </div>
     </footer>
 
     <!-- Logic Script -->
     <script>
+        // 20 Languages Dictionary
+        const i18n = {
+            en: {
+                navCalc: "Hybrid Calculator", navEnc: "Flower Encyclopedia",
+                calcHeading: "Flower Hybrid Simulator", calcSub: "Select species and colors for parent flowers to calculate expected hybrid offspring and probabilities.",
+                parentA: "🌸 Parent A", parentB: "🌺 Parent B", species: "Species", color: "Color", results: "🎯 Estimated Hybrid Outcomes",
+                encHeading: "Flower Genetics Encyclopedia", encSub: "Browse full flower genetics, obtainability, and breeding paths for rare colors in Heartopia.",
+                btnAll: "All Species", footer: "Heartopia Flower Hub © 2026. Made with ❤️ for Heartopia Gardeners."
+            },
+            zh: {
+                navCalc: "杂交计算器", navEnc: "鲜花全图鉴",
+                calcHeading: "鲜花杂交模拟计算器", calcSub: "选择两朵亲本花的品种与颜色，即刻推算下一代可能产出的新花色及概率。",
+                parentA: "🌸 亲本 A", parentB: "🌺 亲本 B", species: "花种", color: "颜色", results: "🎯 预测杂交结果",
+                encHeading: "鲜花基因全图鉴", encSub: "查阅心动小镇全花种的颜色分类、获取难度以及稀有配色的繁育路径。",
+                btnAll: "全部花种", footer: "Heartopia Flower Hub © 2026. 为心动小镇园艺师精心打造。"
+            },
+            ja: {
+                navCalc: "交配計算機", navEnc: "全花図鑑",
+                calcHeading: "お花交配シミュレーター", calcSub: "親となるお花の種類と色を選択し、交配結果と確率を計算します。",
+                parentA: "🌸 親 A", parentB: "🌺 親 B", species: "種類", color: "色", results: "🎯 予想交配結果",
+                encHeading: "お花遺伝子全図鑑", encSub: "すべての花の種類、入手難易度、レアカラーの交配ルートを閲覧できます。",
+                btnAll: "すべての花", footer: "Heartopia Flower Hub © 2026. ガーデナーのために心を込めて制作。"
+            },
+            ko: {
+                navCalc: "교배 계산기", navEnc: "꽃 도감",
+                calcHeading: "꽃 교배 시뮬레이터", calcSub: "부모 꽃의 종류와 색상을 선택하여 예상되는 자손과 확률을 계산합니다.",
+                parentA: "🌸 부모 A", parentB: "🌺 부모 B", species: "품종", color: "색상", results: "🎯 예상 교배 결과",
+                encHeading: "꽃 유전자 백과사전", encSub: "모든 꽃의 희귀 색상 조합 및 교배 경로를 확인하세요.",
+                btnAll: "모든 품종", footer: "Heartopia Flower Hub © 2026. 원예가를 위해 사랑으로 제작되었습니다."
+            },
+            es: {
+                navCalc: "Calculadora de Híbridos", navEnc: "Enciclopedia de Flores",
+                calcHeading: "Simulador de Hibridación", calcSub: "Selecciona las flores progenitoras para calcular los resultados esperados y probabilidades.",
+                parentA: "🌸 Progenitor A", parentB: "🌺 Progenitor B", species: "Especie", color: "Color", results: "🎯 Resultados Estimados",
+                encHeading: "Enciclopedia Genética de Flores", encSub: "Explora la genética, dificultad y rutas para colores raros.",
+                btnAll: "Todas las Especies", footer: "Heartopia Flower Hub © 2026. Hecho con ❤️ para jardineros."
+            },
+            fr: {
+                navCalc: "Calculateur d'Hybrides", navEnc: "Encyclopédie des Fleurs",
+                calcHeading: "Simulateur d'Hybridation", calcSub: "Sélectionnez les fleurs parents pour calculer les probabilités d'obtention.",
+                parentA: "🌸 Parent A", parentB: "🌺 Parent B", species: "Espèce", color: "Couleur", results: "🎯 Résultats Estimés",
+                encHeading: "Encyclopédie Génétique", encSub: "Consultez la génétique complète et les combinaisons rares.",
+                btnAll: "Toutes les Espèces", footer: "Heartopia Flower Hub © 2026. Fait avec ❤️ pour les jardiniers."
+            }
+        };
+
+        // Switch Language
+        function changeLanguage(lang) {
+            const data = i18n[lang] || i18n['en'];
+            
+            document.getElementById('nav-calc').innerText = data.navCalc;
+            document.getElementById('nav-encyclopedia').innerText = data.navEnc;
+            document.getElementById('calc-heading').innerText = data.calcHeading;
+            document.getElementById('calc-sub').innerText = data.calcSub;
+            document.getElementById('label-parent-a').innerText = data.parentA;
+            document.getElementById('label-parent-b').innerText = data.parentB;
+            document.getElementById('label-species-a').innerText = data.species;
+            document.getElementById('label-species-b').innerText = data.species;
+            document.getElementById('label-color-a').innerText = data.color;
+            document.getElementById('label-color-b').innerText = data.color;
+            document.getElementById('label-results').innerText = data.results;
+            document.getElementById('enc-heading').innerText = data.encHeading;
+            document.getElementById('enc-sub').innerText = data.encSub;
+            document.getElementById('btn-filter-all').innerText = data.btnAll;
+            document.getElementById('footer-text').innerText = data.footer;
+        }
+
         // Tab Switcher
         function switchTab(tabName) {
             const calcTab = document.getElementById('tab-calculator');
@@ -262,7 +344,7 @@
             }
         }
 
-        // Calculator Logic Simulation
+        // Hybrid Calculator Simulation Logic
         function calculateBreed() {
             const colorA = document.getElementById('parentA-color').value;
             const colorB = document.getElementById('parentB-color').value;
@@ -270,34 +352,34 @@
 
             let outcomes = [];
 
-            if (colorA === 'red' && colorB === 'yellow' || colorA === 'yellow' && colorB === 'red') {
+            if ((colorA === 'red' && colorB === 'yellow') || (colorA === 'yellow' && colorB === 'red')) {
                 outcomes = [
-                    { color: '橙色 (Orange)', chance: '50%', bg: 'bg-orange-100 text-orange-800' },
-                    { color: '红色 (Red)', chance: '25%', bg: 'bg-red-100 text-red-800' },
-                    { color: '黄色 (Yellow)', chance: '25%', bg: 'bg-yellow-100 text-yellow-800' }
+                    { color: 'Orange', chance: '50%', bg: 'bg-orange-100 text-orange-800' },
+                    { color: 'Red', chance: '25%', bg: 'bg-red-100 text-red-800' },
+                    { color: 'Yellow', chance: '25%', bg: 'bg-yellow-100 text-yellow-800' }
                 ];
             } else if (colorA === 'white' && colorB === 'white') {
                 outcomes = [
-                    { color: '白色 (White)', chance: '85%', bg: 'bg-stone-100 text-stone-800' },
-                    { color: '蓝色 (Blue) - 稀有', chance: '15%', bg: 'bg-blue-100 text-blue-800' }
+                    { color: 'White', chance: '85%', bg: 'bg-stone-100 text-stone-800' },
+                    { color: 'Blue (Rare)', chance: '15%', bg: 'bg-blue-100 text-blue-800' }
                 ];
             } else {
                 outcomes = [
-                    { color: '混合亲本色 (Parent Mix)', chance: '70%', bg: 'bg-emerald-100 text-emerald-800' },
-                    { color: '突变色 (Mutation)', chance: '30%', bg: 'bg-purple-100 text-purple-800' }
+                    { color: 'Parent Mix', chance: '70%', bg: 'bg-emerald-100 text-emerald-800' },
+                    { color: 'Mutation', chance: '30%', bg: 'bg-purple-100 text-purple-800' }
                 ];
             }
 
             container.innerHTML = outcomes.map(o => `
                 <div class="p-4 rounded-xl ${o.bg} border border-black/5 text-center space-y-1">
                     <div class="text-sm font-bold">${o.color}</div>
-                    <div class="text-xs opacity-80">预计概率: ${o.chance}</div>
+                    <div class="text-xs opacity-80">Probability: ${o.chance}</div>
                 </div>
             `).join('');
         }
 
         // Filter Encyclopedia Cards
-        function filterFlowerCards(category) {
+        function filterCards(category) {
             const cards = document.querySelectorAll('.flower-card');
             cards.forEach(card => {
                 if (category === 'all' || card.classList.contains(category)) {
@@ -308,7 +390,7 @@
             });
         }
 
-        // Initialize Calculation on Load
+        // Initialize Default Setup
         window.onload = function() {
             calculateBreed();
         };
